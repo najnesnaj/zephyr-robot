@@ -1,0 +1,101 @@
+diff -ru /home/naj/micro_ros_zephyr_module/CMakeLists.txt /home/naj/zephyrproject/micro_ros_zephyr_module/CMakeLists.txt
+--- /home/naj/micro_ros_zephyr_module/CMakeLists.txt	2026-03-21 09:55:14.221110400 +0100
++++ /home/naj/zephyrproject/micro_ros_zephyr_module/CMakeLists.txt	2026-03-21 09:17:25.645648597 +0100
+@@ -7,4 +7,4 @@
+ find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
+ project(microros_sample_app)
+ 
+-target_sources(app PRIVATE src/main.c)
++target_sources(app PRIVATE src/main.c src/clock_gettime.c)
+Binary files /home/naj/micro_ros_zephyr_module/.git/index and /home/naj/zephyrproject/micro_ros_zephyr_module/.git/index differ
+diff -ru /home/naj/micro_ros_zephyr_module/.git/logs/HEAD /home/naj/zephyrproject/micro_ros_zephyr_module/.git/logs/HEAD
+--- /home/naj/micro_ros_zephyr_module/.git/logs/HEAD	2026-03-21 09:55:14.218661350 +0100
++++ /home/naj/zephyrproject/micro_ros_zephyr_module/.git/logs/HEAD	2026-03-21 08:59:01.626736586 +0100
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 229ffc0e131ee7942db3bb2e731fb8851583bb25 naj <najnesnaj@yahoo.com> 1774083314 +0100	clone: from https://github.com/micro-ROS/micro_ros_zephyr_module.git
++0000000000000000000000000000000000000000 229ffc0e131ee7942db3bb2e731fb8851583bb25 naj <najnesnaj@yahoo.com> 1774079941 +0100	clone: from https://github.com/micro-ROS/micro_ros_zephyr_module.git
+diff -ru /home/naj/micro_ros_zephyr_module/.git/logs/refs/heads/kilted /home/naj/zephyrproject/micro_ros_zephyr_module/.git/logs/refs/heads/kilted
+--- /home/naj/micro_ros_zephyr_module/.git/logs/refs/heads/kilted	2026-03-21 09:55:14.218661350 +0100
++++ /home/naj/zephyrproject/micro_ros_zephyr_module/.git/logs/refs/heads/kilted	2026-03-21 08:59:01.626736586 +0100
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 229ffc0e131ee7942db3bb2e731fb8851583bb25 naj <najnesnaj@yahoo.com> 1774083314 +0100	clone: from https://github.com/micro-ROS/micro_ros_zephyr_module.git
++0000000000000000000000000000000000000000 229ffc0e131ee7942db3bb2e731fb8851583bb25 naj <najnesnaj@yahoo.com> 1774079941 +0100	clone: from https://github.com/micro-ROS/micro_ros_zephyr_module.git
+diff -ru /home/naj/micro_ros_zephyr_module/.git/logs/refs/remotes/origin/HEAD /home/naj/zephyrproject/micro_ros_zephyr_module/.git/logs/refs/remotes/origin/HEAD
+--- /home/naj/micro_ros_zephyr_module/.git/logs/refs/remotes/origin/HEAD	2026-03-21 09:55:14.218038768 +0100
++++ /home/naj/zephyrproject/micro_ros_zephyr_module/.git/logs/refs/remotes/origin/HEAD	2026-03-21 08:59:01.626240283 +0100
+@@ -1 +1 @@
+-0000000000000000000000000000000000000000 229ffc0e131ee7942db3bb2e731fb8851583bb25 naj <najnesnaj@yahoo.com> 1774083314 +0100	clone: from https://github.com/micro-ROS/micro_ros_zephyr_module.git
++0000000000000000000000000000000000000000 229ffc0e131ee7942db3bb2e731fb8851583bb25 naj <najnesnaj@yahoo.com> 1774079941 +0100	clone: from https://github.com/micro-ROS/micro_ros_zephyr_module.git
+Only in /home/naj/micro_ros_zephyr_module/.git/objects/pack: pack-a494ae79510cdcedf6b5cdde6437bbfe1a4f24c5.idx
+Only in /home/naj/micro_ros_zephyr_module/.git/objects/pack: pack-a494ae79510cdcedf6b5cdde6437bbfe1a4f24c5.pack
+Only in /home/naj/micro_ros_zephyr_module/.git/objects/pack: pack-a494ae79510cdcedf6b5cdde6437bbfe1a4f24c5.rev
+Only in /home/naj/zephyrproject/micro_ros_zephyr_module/.git/objects/pack: pack-e1643787693b2d4f623bff8ee464dd3544c3595e.idx
+Only in /home/naj/zephyrproject/micro_ros_zephyr_module/.git/objects/pack: pack-e1643787693b2d4f623bff8ee464dd3544c3595e.pack
+Only in /home/naj/zephyrproject/micro_ros_zephyr_module/.git/objects/pack: pack-e1643787693b2d4f623bff8ee464dd3544c3595e.rev
+Only in /home/naj/zephyrproject/micro_ros_zephyr_module/.git: opencode
+diff -ru /home/naj/micro_ros_zephyr_module/modules/libmicroros/colcon.meta /home/naj/zephyrproject/micro_ros_zephyr_module/modules/libmicroros/colcon.meta
+--- /home/naj/micro_ros_zephyr_module/modules/libmicroros/colcon.meta	2026-03-21 09:55:14.222599739 +0100
++++ /home/naj/zephyrproject/micro_ros_zephyr_module/modules/libmicroros/colcon.meta	2026-03-21 09:34:02.821585374 +0100
+@@ -29,9 +29,9 @@
+         },
+         "rmw_microxrcedds": {
+             "cmake-args": [
+-                "-DRMW_UXRCE_MAX_NODES=1",
+-                "-DRMW_UXRCE_MAX_PUBLISHERS=1",
+-                "-DRMW_UXRCE_MAX_SUBSCRIPTIONS=0",
++                "-DRMW_UXRCE_MAX_NODES=4",
++                "-DRMW_UXRCE_MAX_PUBLISHERS=4",
++                "-DRMW_UXRCE_MAX_SUBSCRIPTIONS=1",
+                 "-DRMW_UXRCE_MAX_HISTORY=4",
+                 "-DRMW_UXRCE_MAX_SERVICES=0",
+                 "-DRMW_UXRCE_MAX_CLIENTS=0",
+Only in /home/naj/zephyrproject/micro_ros_zephyr_module/modules/libmicroros: configured_colcon.meta
+Only in /home/naj/zephyrproject/micro_ros_zephyr_module/modules/libmicroros: include
+diff -ru /home/naj/micro_ros_zephyr_module/modules/libmicroros/Kconfig /home/naj/zephyrproject/micro_ros_zephyr_module/modules/libmicroros/Kconfig
+--- /home/naj/micro_ros_zephyr_module/modules/libmicroros/Kconfig	2026-03-21 09:55:14.222599739 +0100
++++ /home/naj/zephyrproject/micro_ros_zephyr_module/modules/libmicroros/Kconfig	2026-03-21 09:42:46.198490914 +0100
+@@ -79,11 +79,11 @@
+     endif
+     config MICROROS_NODES
+         string "available micro-ROS nodes"
+-        default "1"
++        default "4"
+ 
+     config MICROROS_PUBLISHERS
+         string "available micro-ROS publishers"
+-        default "1"
++        default "4"
+     
+     config MICROROS_SUBSCRIBERS
+         string "available micro-ROS subscribers"
+Only in /home/naj/zephyrproject/micro_ros_zephyr_module/modules/libmicroros: libmicroros.a
+Only in /home/naj/zephyrproject/micro_ros_zephyr_module/modules/libmicroros: micro_ros_dev
+Only in /home/naj/zephyrproject/micro_ros_zephyr_module/modules/libmicroros: micro_ros_src
+Only in /home/naj/zephyrproject/micro_ros_zephyr_module/modules/libmicroros: zephyr_toolchain.cmake
+diff -ru /home/naj/micro_ros_zephyr_module/prj.conf /home/naj/zephyrproject/micro_ros_zephyr_module/prj.conf
+--- /home/naj/micro_ros_zephyr_module/prj.conf	2026-03-21 09:55:14.223321400 +0100
++++ /home/naj/zephyrproject/micro_ros_zephyr_module/prj.conf	2026-03-21 09:17:21.972623476 +0100
+@@ -7,10 +7,8 @@
+ 
+ CONFIG_NEWLIB_LIBC=y
+ CONFIG_NEWLIB_LIBC_NANO=n
+-CONFIG_PTHREAD_IPC=n
+ 
+ CONFIG_POSIX_API=y
+-CONFIG_POSIX_CLOCK=y
+ 
+ CONFIG_STDOUT_CONSOLE=y
+ CONFIG_LOG=y
+Only in /home/naj/zephyrproject/micro_ros_zephyr_module/src: clock_gettime.c
+diff -ru /home/naj/micro_ros_zephyr_module/src/main.c /home/naj/zephyrproject/micro_ros_zephyr_module/src/main.c
+--- /home/naj/micro_ros_zephyr_module/src/main.c	2026-03-21 09:55:14.223321400 +0100
++++ /home/naj/zephyrproject/micro_ros_zephyr_module/src/main.c	2026-03-21 09:13:14.458607896 +0100
+@@ -5,7 +5,7 @@
+ #include <zephyr/device.h>
+ #include <zephyr/devicetree.h>
+ #include <zephyr/drivers/gpio.h>
+-#include <zephyr/posix/time.h>
++#include <time.h>
+ #else
+ #include <zephyr.h>
+ #include <device.h>
