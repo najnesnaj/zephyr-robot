@@ -1,0 +1,65 @@
+/*
+ * Device tree overlay for STM32F411 Black Pill with 3 AS5600 encoders
+ * for micro-ROS as5600_publisher application using USB CDC ACM
+ */
+
+&i2c1 {
+    status = "okay";
+    pinctrl-0 = <&i2c1_scl_pb6 &i2c1_sda_pb7>;
+    pinctrl-names = "default";
+    clock-frequency = <100000>;
+
+    as5600_1: as5600@36 {
+        compatible = "ams,as5600";
+        status = "okay";
+        reg = <0x36>;
+    };
+};
+
+&i2c2 {
+    pinctrl-0 = <&i2c2_scl_pb10 &i2c2_sda_pb3>;
+    pinctrl-names = "default";
+    status = "okay";
+    clock-frequency = <100000>;
+
+    as5600_2: as5600@36 {
+        compatible = "ams,as5600";
+        status = "okay";
+        reg = <0x36>;
+    };
+};
+
+&i2c3 {
+    pinctrl-0 = <&i2c3_scl_pa8 &i2c3_sda_pb4>;
+    pinctrl-names = "default";
+    status = "okay";
+    clock-frequency = <100000>;
+
+    as5600_3: as5600@36 {
+        compatible = "ams,as5600";
+        status = "okay";
+        reg = <0x36>;
+    };
+};
+
+
+/ {
+    chosen {
+        zephyr,console = &cdc_acm_uart0;
+        zephyr,shell-uart = &cdc_acm_uart0;
+    };
+};
+
+&usbotg_fs {
+    pinctrl-0 = <&usb_otg_fs_dm_pa11 &usb_otg_fs_dp_pa12>;
+    pinctrl-names = "default";
+    status = "okay";
+};
+
+&usbotg_fs {
+    cdc_acm_uart0: cdc_acm_uart0 {
+        compatible = "zephyr,cdc-acm-uart";
+        label = "CDC_ACM_0";
+    };
+};
+

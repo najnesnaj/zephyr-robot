@@ -1,0 +1,63 @@
+/* Blackpill F411 - Servo on PB6 (TIM4 Channel 1) */
+
+#include <zephyr/dt-bindings/pwm/pwm.h>
+
+
+/* ==================== PWM Configuration ==================== */
+
+&pinctrl {
+    usart1_tx_pa9: usart1_tx_pa9 {
+        pinmux = <STM32_PINMUX('A', 9, AF7)>;
+    };
+    usart1_rx_pa10: usart1_rx_pa10 {
+        pinmux = <STM32_PINMUX('A', 10, AF7)>;
+    };
+    /* PB8 as TIM4 Channel 3 */
+    tim4_ch3_pb8: tim4_ch3_pb8 {
+        pinmux = <STM32_PINMUX('B', 8, AF2)>;
+    };
+};
+
+&timers4 {
+    status = "okay";
+    st,prescaler = <1000>; // Helpt om binnen het bereik van de timer te blijven
+
+    pwm4: pwm {
+        status = "okay";
+        pinctrl-0 = <&tim4_ch3_pb8>;
+        pinctrl-names = "default";
+    };
+};
+
+/ {
+    servo: servo {
+        compatible = "pwm-servo";
+        pwms = <&pwm4 3 20000000 PWM_POLARITY_NORMAL>;
+        min-pulse = <700000>;   // 0.7ms
+        max-pulse = <2300000>;  // 2.3ms
+    };
+};
+
+
+
+
+/* USART1 (PA9/PA10) for serial debug output */
+&usart1 {
+    status = "okay";
+    current-speed = <115200>;
+    pinctrl-0 = <&usart1_tx_pa9 &usart1_rx_pa10>;
+    pinctrl-names = "default";
+};
+
+
+/* Enable USB CDC for console/shell */
+&usbotg_fs {
+    status = "okay";
+};
+
+&zephyr_udc0 {
+    cdc_acm_uart0: cdc_acm_uart0 {
+        compatible = "zephyr,cdc-acm-uart";
+        label = "CDC_ACM_0";
+    };
+};

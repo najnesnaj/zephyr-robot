@@ -1,0 +1,50 @@
+&pinctrl {
+    /* PWM Pin-definitie voor de servo op PB6 */
+    tim4_ch1_pb6: tim4_ch1_pb6 {
+        pinmux = <STM32_PINMUX('B', 6, AF2)>;
+    };
+
+    /* Geforceerde USART1 pinnen op PORT A (Haalt UART weg van PB6) */
+    usart1_tx_pa9: usart1_tx_pa9 {
+        pinmux = <STM32_PINMUX('A', 9, AF7)>;
+    };
+    usart1_rx_pa10: usart1_rx_pa10 {
+        pinmux = <STM32_PINMUX('A', 10, AF7)>;
+    };
+};
+
+/* Schakel de standaard I2C1 bus uit zodat PB6/PB7 volledig vrijkomen */
+&i2c1 {
+    status = "disabled";
+};
+
+/* Configureer USART1 met de nieuwe pinnen op PORT A */
+&usart1 {
+    status = "okay";
+    pinctrl-0 = <&usart1_tx_pa9 &usart1_rx_pa10>;
+    pinctrl-names = "default";
+    current-speed = <115200>;
+};
+
+/* GECORRIGEERD: Pas de bestaande 'pwm' subnode aan onder &timers4 */
+&timers4 {
+    status = "okay";
+    pwm {
+        status = "okay";
+        pinctrl-0 = <&tim4_ch1_pb6>;
+        pinctrl-names = "default";
+    };
+};
+
+/* De servo-definitie met de juiste parameters voor een analoge servo */
+/ {
+    servo: servo {
+        compatible = "pwm-servo";
+        /* We gebruiken '&pwm4' omdat Zephyr de 'pwm' node onder &timers4 
+           automatisch het globale label 'pwm4' geeft */
+        pwms = <&pwm4 2 PWM_MSEC(20) PWM_POLARITY_NORMAL>;
+        min-pulse = <PWM_USEC(700)>;
+        max-pulse = <PWM_USEC(2500)>;
+    };
+};
+

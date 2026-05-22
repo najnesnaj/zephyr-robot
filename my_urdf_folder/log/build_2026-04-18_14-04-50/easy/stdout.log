@@ -1,0 +1,47 @@
+-- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Configuring done (0.3s)
+-- Generating done (0.0s)
+-- Build files have been written to: /urdf/build/easy
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /urdf/install/easy/share/ament_index/resource_index/package_run_dependencies/easy
+-- Symlinking: /urdf/install/easy/share/ament_index/resource_index/parent_prefix_path/easy
+-- Symlinking: /urdf/install/easy/share/easy/environment/ament_prefix_path.sh
+-- Symlinking: /urdf/install/easy/share/easy/environment/ament_prefix_path.dsv
+-- Symlinking: /urdf/install/easy/share/easy/environment/path.sh
+-- Symlinking: /urdf/install/easy/share/easy/environment/path.dsv
+-- Symlinking: /urdf/install/easy/share/easy/local_setup.bash
+-- Symlinking: /urdf/install/easy/share/easy/local_setup.sh
+-- Symlinking: /urdf/install/easy/share/easy/local_setup.zsh
+-- Symlinking: /urdf/install/easy/share/easy/local_setup.dsv
+-- Symlinking: /urdf/install/easy/share/easy/package.dsv
+-- Symlinking: /urdf/install/easy/share/ament_index/resource_index/packages/easy
+-- Symlinking: /urdf/install/easy/share/easy/cmake/easyConfig.cmake
+-- Symlinking: /urdf/install/easy/share/easy/cmake/easyConfig-version.cmake
+-- Symlinking: /urdf/install/easy/share/easy/package.xml
+-- Symlinking: /urdf/install/easy/share/easy/launch/__pycache__/demo.launch.cpython-312.pyc
+-- Symlinking: /urdf/install/easy/share/easy/launch/__pycache__/move_group.launch.cpython-312.pyc
+-- Symlinking: /urdf/install/easy/share/easy/launch/__pycache__/moveit_rviz.launch.cpython-312.pyc
+-- Symlinking: /urdf/install/easy/share/easy/launch/__pycache__/rsp.launch.cpython-312.pyc
+-- Symlinking: /urdf/install/easy/share/easy/launch/__pycache__/spawn_controllers.launch.cpython-312.pyc
+-- Symlinking: /urdf/install/easy/share/easy/launch/__pycache__/static_virtual_joint_tfs.launch.cpython-312.pyc
+-- Symlinking: /urdf/install/easy/share/easy/launch/__pycache__/warehouse_db.launch.cpython-312.pyc
+-- Symlinking: /urdf/install/easy/share/easy/launch/demo.launch.py
+-- Symlinking: /urdf/install/easy/share/easy/launch/move_group.launch.py
+-- Symlinking: /urdf/install/easy/share/easy/launch/move_group.launch.py-old
+-- Symlinking: /urdf/install/easy/share/easy/launch/moveit_rviz.launch.py
+-- Symlinking: /urdf/install/easy/share/easy/launch/rsp.launch.py
+-- Symlinking: /urdf/install/easy/share/easy/launch/setup_assistant.launch.py
+-- Symlinking: /urdf/install/easy/share/easy/launch/spawn_controllers.launch.py
+-- Symlinking: /urdf/install/easy/share/easy/launch/static_virtual_joint_tfs.launch.py
+-- Symlinking: /urdf/install/easy/share/easy/launch/warehouse_db.launch.py
+-- Symlinking: /urdf/install/easy/share/easy/config/config/ebamk2.ros2_control.xacro
+-- Symlinking: /urdf/install/easy/share/easy/config/config/ebamk2.srdf
+-- Symlinking: /urdf/install/easy/share/easy/config/config/ebamk2.urdf.xacro
+-- Symlinking: /urdf/install/easy/share/easy/config/config/initial_positions.yaml
+-- Symlinking: /urdf/install/easy/share/easy/config/config/joint_limits.yaml
+-- Symlinking: /urdf/install/easy/share/easy/config/config/kinematics.yaml
+-- Symlinking: /urdf/install/easy/share/easy/config/config/moveit.rviz
+-- Symlinking: /urdf/install/easy/share/easy/config/config/pilz_cartesian_limits.yaml
+-- Symlinking: /urdf/install/easy/share/easy/.setup_assistant

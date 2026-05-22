@@ -1,0 +1,37 @@
+/*
+ * Device tree overlay for STM32F401RE Nucleo with 3 AS5600 encoders
+ * for micro-ROS as5600_publisher application using USB CDC ACM
+ */
+
+&i2c1 {
+    status = "okay";
+
+    as5600_1: as5600@36 {
+        compatible = "ams,as5600";
+        status = "okay";
+        reg = <0x36>;
+    };
+};
+
+&i2c2 {
+    pinctrl-0 = <&i2c2_scl_pb10 &i2c2_sda_pb3>;
+    pinctrl-names = "default";
+    status = "okay";
+    clock-frequency = <100000>;
+
+    as5600_2: as5600@36 {
+        compatible = "ams,as5600";
+        status = "okay";
+        reg = <0x36>;
+    };
+};
+
+&i2c3 {
+    status = "okay";
+
+    as5600_3: as5600@36 {
+        compatible = "ams,as5600";
+        status = "okay";
+        reg = <0x36>;
+    };
+};

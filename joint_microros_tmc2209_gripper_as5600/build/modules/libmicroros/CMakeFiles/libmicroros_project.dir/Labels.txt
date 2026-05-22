@@ -1,0 +1,13 @@
+# Target labels
+ libmicroros_project
+# Source files and their labels
+/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600/build/modules/libmicroros/CMakeFiles/libmicroros_project
+/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600/build/modules/libmicroros/CMakeFiles/libmicroros_project.rule
+/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600/build/modules/libmicroros/CMakeFiles/libmicroros_project-complete.rule
+/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600/build/libmicroros-prefix/src/libmicroros_project-stamp/libmicroros_project-build.rule
+/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600/build/libmicroros-prefix/src/libmicroros_project-stamp/libmicroros_project-configure.rule
+/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600/build/libmicroros-prefix/src/libmicroros_project-stamp/libmicroros_project-download.rule
+/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600/build/libmicroros-prefix/src/libmicroros_project-stamp/libmicroros_project-install.rule
+/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600/build/libmicroros-prefix/src/libmicroros_project-stamp/libmicroros_project-mkdir.rule
+/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600/build/libmicroros-prefix/src/libmicroros_project-stamp/libmicroros_project-patch.rule
+/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600/build/libmicroros-prefix/src/libmicroros_project-stamp/libmicroros_project-update.rule

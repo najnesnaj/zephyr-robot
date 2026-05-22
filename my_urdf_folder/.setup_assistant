@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: ""
+    relative_path: /root/ws_moveit/temp/ebamk2_mesh.urdf
+  srdf:
+    relative_path: config/ebamk2.srdf
+  package_settings:
+    author_name: snow
+    author_email: body@yahoo.com
+    generated_timestamp: 1767111165
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity

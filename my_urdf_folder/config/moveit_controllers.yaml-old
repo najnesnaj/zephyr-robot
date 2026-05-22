@@ -1,0 +1,2 @@
+controller_list: []
+moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager

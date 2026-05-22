@@ -1,0 +1,4 @@
+west:
+  command: /home/naj/zephyrproject/.venv/bin/west build -p always -b blackpill_f411ce
+  topdir: /home/naj/zephyrproject
+  version: 1.5.0
