@@ -83,19 +83,19 @@ $(COMPONENT_PATH)/micro_ros_src/src:
 	git clone -b kilted https://github.com/micro-ROS/rmw-microxrcedds src/rmw-microxrcedds; \
 	git clone -b kilted https://github.com/micro-ROS/rosidl_typesupport src/rosidl_typesupport; \
 	git clone -b kilted https://github.com/micro-ROS/rosidl_typesupport_microxrcedds src/rosidl_typesupport_microxrcedds; \
-	git clone -b kilted https://github.com/ros2/rosidl src/rosidl; \
-	git clone -b kilted https://github.com/ros2/rosidl_dynamic_typesupport src/rosidl_dynamic_typesupport; \
-	git clone -b kilted https://github.com/ros2/rmw src/rmw; \
-	git clone -b kilted https://github.com/ros2/rcl_interfaces src/rcl_interfaces; \
-	git clone -b kilted https://github.com/ros2/rosidl_defaults src/rosidl_defaults; \
-	git clone -b kilted https://github.com/ros2/unique_identifier_msgs src/unique_identifier_msgs; \
-	git clone -b kilted https://github.com/ros2/common_interfaces src/common_interfaces; \
-	git clone -b kilted https://github.com/ros2/test_interface_files src/test_interface_files; \
-	git clone -b kilted https://github.com/ros2/rmw_implementation src/rmw_implementation; \
-	git clone -b kilted https://github.com/ros2/rcl_logging src/rcl_logging; \
-	git clone -b kilted https://github.com/ros2/ros2_tracing src/ros2_tracing; \
-	git clone -b kilted https://github.com/micro-ROS/micro_ros_utilities src/micro_ros_utilities; \
-	git clone -b kilted https://github.com/ros2/rosidl_core src/rosidl_core; \
+	git clone -b ros2 https://github.com/ros2/rosidl src/rosidl; \
+	git clone -b ros2 https://github.com/ros2/rosidl_dynamic_typesupport src/rosidl_dynamic_typesupport; \
+	git clone -b ros2 https://github.com/ros2/rmw src/rmw; \
+	git clone -b ros2 https://github.com/ros2/rcl_interfaces src/rcl_interfaces; \
+	git clone -b ros2 https://github.com/ros2/rosidl_defaults src/rosidl_defaults; \
+	git clone -b ros2 https://github.com/ros2/unique_identifier_msgs src/unique_identifier_msgs; \
+	git clone -b ros2 https://github.com/ros2/common_interfaces src/common_interfaces; \
+	git clone -b ros2 https://github.com/ros2/test_interface_files src/test_interface_files; \
+	git clone -b ros2 https://github.com/ros2/rmw_implementation src/rmw_implementation; \
+	git clone -b ros2 https://github.com/ros2/rcl_logging src/rcl_logging; \
+	git clone -b ros2 https://github.com/ros2/ros2_tracing src/ros2_tracing; \
+	git clone -b ros2 https://github.com/micro-ROS/micro_ros_utilities src/micro_ros_utilities; \
+	git clone -b ros2 https://github.com/ros2/rosidl_core src/rosidl_core; \
 	touch src/ros2_tracing/test_tracetools/COLCON_IGNORE; \
 	touch src/ros2_tracing/lttngpy/COLCON_IGNORE; \
     touch src/rosidl/rosidl_typesupport_introspection_cpp/COLCON_IGNORE; \
@@ -105,7 +105,8 @@ $(COMPONENT_PATH)/micro_ros_src/src:
 	touch src/rcl/rcl_yaml_param_parser/COLCON_IGNORE; \
     touch src/rcl_logging/rcl_logging_spdlog/COLCON_IGNORE; \
     touch src/rcl_interfaces/test_msgs/COLCON_IGNORE; \
-	touch src/rmw/rmw_security_common/COLCON_IGNORE;
+	touch src/rmw/rmw_security_common/COLCON_IGNORE; \
+	patch -p1 -d src/rcutils < $(COMPONENT_PATH)/rcutils_zephyr_fix.patch || true
 
 $(COMPONENT_PATH)/micro_ros_src/install: configure_colcon_meta configure_toolchain $(COMPONENT_PATH)/micro_ros_dev/install $(COMPONENT_PATH)/micro_ros_src/src
 	cd $(UROS_DIR); \

@@ -1,0 +1,20 @@
+--- a/src/rcutils/src/time_unix.c
++++ b/src/rcutils/src/time_unix.c
+@@ -25,13 +25,13 @@
+ #include "rcutils/logging_macros.h"
+ #include "rcutils/time.h"
+ 
+ #if defined(__MACH__) && defined(__APPLE__)
+ #include <mach/clock.h>
+ #include <mach/mach.h>
+ #endif  // defined(__MACH__) && defined(__APPLE__)
+ #include <math.h>
+ 
+ #if defined(__ZEPHYR__)
+-#include <version.h>
+-#include <zephyr/posix/posix_time.h>
++#include <time.h>
++#include <zephyr/posix/posix_time.h>
+ #else  //  #if KERNELVERSION >= ZEPHYR_VERSION(3, 1, 0)
+ #include <time.h>
+ #endif  //  defined(__ZEPHYR__)
