@@ -1,3 +1,23 @@
+## Documentation
+
+This project has multiple levels of documentation:
+
+### 📖 Quick Documentation (GitHub Wiki)
+- General overview, setup guides, and quick references.
+- **[Open Wiki](https://github.com/najnesnaj/zephyr-robot/wiki)**
+
+### 📘 Full Technical Manual (Sphinx)
+A very detailed, professionally structured documentation including diagrams, API references, and build instructions.
+
+- **HTML Version**: Available in the `docs/build/html/index.html` folder  
+- **PDF Version**: Available in the `docs/build/latex/zephyr_robot.pdf` (or similar)
+
+**Location**:  
+[`joint_microros_tmc2209_gripper_as5600/docs`](https://github.com/najnesnaj/zephyr-robot/tree/main/joint_microros_tmc2209_gripper_as5600/docs)
+
+---
+
+
 # 3-DOF Robotic Joint with Gripper — Zephyr + micro-ROS
 
 [![Zephyr](https://img.shields.io/badge/RTOS-Zephyr-6C2BD9)](https://zephyrproject.org)
