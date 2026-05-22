@@ -1,0 +1,63 @@
+cmake:
+  application:
+    configuration-dir: '/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600_combined'
+    source-dir: '/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600_combined'
+  board:
+    name: 'blackpill_f411ce'
+    path:
+     - '/home/naj/zephyrproject/zephyr/boards/weact/blackpill_f411ce'
+    qualifiers: 'stm32f411xe'
+    revision: ''
+  devicetree:
+    bindings-dirs:
+     - '/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600_combined/dts/bindings'
+     - '/home/naj/zephyrproject/zephyr/dts/bindings'
+    files:
+     - '/home/naj/zephyrproject/zephyr/boards/weact/blackpill_f411ce/blackpill_f411ce.dts'
+     - '/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay'
+    include-dirs:
+     - '/home/naj/zephyrproject/modules/hal/ambiq/dts'
+     - '/home/naj/zephyrproject/modules/hal/atmel/include'
+     - '/home/naj/zephyrproject/modules/hal/bouffalolab/include'
+     - '/home/naj/zephyrproject/modules/hal/bouffalolab/include/zephyr'
+     - '/home/naj/zephyrproject/modules/hal/gigadevice/include'
+     - '/home/naj/zephyrproject/modules/hal/microchip/include'
+     - '/home/naj/zephyrproject/modules/hal/microchip/dts'
+     - '/home/naj/zephyrproject/modules/hal/nuvoton/dts'
+     - '/home/naj/zephyrproject/modules/hal/nxp/dts'
+     - '/home/naj/zephyrproject/modules/hal/stm32/dts'
+     - '/home/naj/zephyrproject/modules/hal/ti/dts'
+     - '/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600_combined/dts'
+     - '/home/naj/zephyrproject/zephyr/include'
+     - '/home/naj/zephyrproject/zephyr/include/zephyr'
+     - '/home/naj/zephyrproject/zephyr/dts/common'
+     - '/home/naj/zephyrproject/zephyr/dts/vendor'
+     - '/home/naj/zephyrproject/zephyr/dts/rx'
+     - '/home/naj/zephyrproject/zephyr/dts/x86'
+     - '/home/naj/zephyrproject/zephyr/dts/xtensa'
+     - '/home/naj/zephyrproject/zephyr/dts/sparc'
+     - '/home/naj/zephyrproject/zephyr/dts/riscv'
+     - '/home/naj/zephyrproject/zephyr/dts/posix'
+     - '/home/naj/zephyrproject/zephyr/dts/arm64'
+     - '/home/naj/zephyrproject/zephyr/dts/arm'
+     - '/home/naj/zephyrproject/zephyr/dts/arc'
+     - '/home/naj/zephyrproject/zephyr/dts'
+    user-files:
+     - '/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay'
+  kconfig:
+    files:
+     - '/home/naj/zephyrproject/zephyr/boards/weact/blackpill_f411ce/blackpill_f411ce_defconfig'
+     - '/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600_combined/prj.conf'
+    user-files:
+     - '/home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600_combined/prj.conf'
+  toolchain:
+    name: 'zephyr'
+    path: '/home/naj/zephyr-sdk-1.0.1'
+  zephyr:
+    version: '4.4.0-rc2'
+    zephyr-base: '/home/naj/zephyrproject/zephyr'
+version: '0.1.0'
+west:
+  command: '/home/naj/zephyrproject/.venv/bin/west build -b blackpill_f411ce --pristine'
+  topdir: '/home/naj/zephyrproject'
+  version: '1.5.0'

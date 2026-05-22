@@ -1,0 +1,7 @@
+combining sensor output AS5600 in radians on a single endpoint /joint_states
+this should allow for feedback for motion planning in rviz, to give it the real position of the robot
+
+
+rviz expects:const char* joint_names[] = {"joint_1", "joint_2", "joint_3", "joint_4", "joint_6"};
+
+joint_4 and joint_6 have no actual value (fake, but can be used later on)

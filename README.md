@@ -18,7 +18,7 @@ A very detailed, professionally structured documentation including diagrams, API
 ---
 
 
-# 3-DOF Robotic Joint with Gripper — Zephyr + micro-ROS
+# 3-DOF Robot with Gripper — Zephyr + micro-ROS
 
 [![Zephyr](https://img.shields.io/badge/RTOS-Zephyr-6C2BD9)](https://zephyrproject.org)
 [![ROS 2](https://img.shields.io/badge/ROS%202-Jazzy-22314E)](https://docs.ros.org/en/jazzy)

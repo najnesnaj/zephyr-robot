@@ -1,0 +1,155 @@
+/*
+ * Device tree overlay for STM32F411 Black Pill with triple TMC2209 stepper drivers,
+ * PWM gripper servo, and three AS5600 magnetic encoders on I2C1/I2C2/I2C3.
+ *
+ * Motor 0 (TMC2209 #1): PC13=EN, PA6=Step, PA7=Dir
+ * Motor 1 (TMC2209 #2): PC13=EN, PA0=Step, PA1=Dir
+ * Motor 2 (TMC2209 #3): PC13=EN, PA3=Step, PA5=Dir
+ * Servo on PB8 (TIM4_CH3)
+ *
+ * AS5600_1 on I2C1 (PB6=SCL, PB7=SDA) @0x36
+ * AS5600_2 on I2C2 (PB10=SCL, PB3=SDA) @0x36
+ * AS5600_3 on I2C3 (PA8=SCL, PB4=SDA) @0x36
+ */
+
+#include <zephyr/dt-bindings/gpio/gpio.h>
+#include <zephyr/dt-bindings/pwm/pwm.h>
+
+/* ==================== I2C Buses with AS5600 ==================== */
+
+&i2c1 {
+    status = "okay";
+    pinctrl-0 = <&i2c1_scl_pb6 &i2c1_sda_pb7>;
+    pinctrl-names = "default";
+    clock-frequency = <100000>;
+
+    as5600_1: as5600@36 {
+        compatible = "ams,as5600";
+        status = "okay";
+        reg = <0x36>;
+    };
+};
+
+&i2c2 {
+    pinctrl-0 = <&i2c2_scl_pb10 &i2c2_sda_pb3>;
+    pinctrl-names = "default";
+    status = "okay";
+    clock-frequency = <100000>;
+
+    as5600_2: as5600@36 {
+        compatible = "ams,as5600";
+        status = "okay";
+        reg = <0x36>;
+    };
+};
+
+&i2c3 {
+    pinctrl-0 = <&i2c3_scl_pa8 &i2c3_sda_pb4>;
+    pinctrl-names = "default";
+    status = "okay";
+    clock-frequency = <100000>;
+
+    as5600_3: as5600@36 {
+        compatible = "ams,as5600";
+        status = "okay";
+        reg = <0x36>;
+    };
+};
+
+/* ==================== PWM Configuration ==================== */
+
+&pinctrl {
+    tim4_ch3_pb8: tim4_ch3_pb8 {
+        pinmux = <STM32_PINMUX('B', 8, AF2)>;
+    };
+};
+
+&timers4 {
+    status = "okay";
+    st,prescaler = <1000>;
+
+    pwm4: pwm {
+        status = "okay";
+        pinctrl-0 = <&tim4_ch3_pb8>;
+        pinctrl-names = "default";
+    };
+};
+
+/* ==================== Devices ==================== */
+
+/ {
+    aliases {
+        stepper0 = &stepper0_control;
+        stepper1 = &stepper1_control;
+        stepper2 = &stepper2_control;
+    };
+
+    servo: servo {
+        compatible = "pwm-servo";
+        pwms = <&pwm4 3 20000000 PWM_POLARITY_NORMAL>;
+        min-pulse = <700000>;
+        max-pulse = <2300000>;
+    };
+
+    tmc2209_m0: tmc2209_m0 {
+        compatible = "adi,tmc2209";
+        en-gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
+        micro-step-res = <32>;
+    };
+
+    tmc2209_m1: tmc2209_m1 {
+        compatible = "adi,tmc2209";
+        en-gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
+        micro-step-res = <32>;
+    };
+
+    tmc2209_m2: tmc2209_m2 {
+        compatible = "adi,tmc2209";
+        en-gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
+        micro-step-res = <32>;
+    };
+
+    stepper0_control: stepper0 {
+        compatible = "zephyr,gpio-step-dir-stepper-ctrl";
+        status = "okay";
+        step-gpios = <&gpioa 6 GPIO_ACTIVE_HIGH>;
+        dir-gpios = <&gpioa 7 GPIO_ACTIVE_HIGH>;
+        stepper-driver = <&tmc2209_m0>;
+    };
+
+    stepper1_control: stepper1 {
+        compatible = "zephyr,gpio-step-dir-stepper-ctrl";
+        status = "okay";
+        step-gpios = <&gpioa 0 GPIO_ACTIVE_HIGH>;
+        dir-gpios = <&gpioa 1 GPIO_ACTIVE_HIGH>;
+        stepper-driver = <&tmc2209_m1>;
+    };
+
+    stepper2_control: stepper2 {
+        compatible = "zephyr,gpio-step-dir-stepper-ctrl";
+        status = "okay";
+        step-gpios = <&gpioa 3 GPIO_ACTIVE_HIGH>;
+        dir-gpios = <&gpioa 5 GPIO_ACTIVE_HIGH>;
+        stepper-driver = <&tmc2209_m2>;
+    };
+
+    chosen {
+        zephyr,console = &cdc_acm_uart0;
+        zephyr,shell-uart = &cdc_acm_uart0;
+    };
+};
+
+/* ==================== USB CDC ACM ==================== */
+
+&usbotg_fs {
+    pinctrl-0 = <&usb_otg_fs_dm_pa11 &usb_otg_fs_dp_pa12>;
+    pinctrl-names = "default";
+    status = "okay";
+};
+
+&zephyr_udc0 {
+    cdc_acm_uart0: cdc_acm_uart0 {
+        compatible = "zephyr,cdc-acm-uart";
+        label = "CDC_ACM_0";
+    };
+};
