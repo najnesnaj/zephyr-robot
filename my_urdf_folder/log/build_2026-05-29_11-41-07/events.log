@@ -1,0 +1,108 @@
+[0.000000] (-) TimerEvent: {}
+[0.000295] (easy) JobQueued: {'identifier': 'easy', 'dependencies': OrderedDict()}
+[0.000922] (easy) JobStarted: {'identifier': 'easy'}
+[0.020597] (easy) JobProgress: {'identifier': 'easy', 'progress': 'cmake'}
+[0.021310] (easy) JobProgress: {'identifier': 'easy', 'progress': 'build'}
+[0.022310] (easy) Command: {'cmd': ['/usr/bin/cmake', '--build', '/urdf/build/easy', '--', '-j8', '-l8'], 'cwd': '/urdf/build/easy', 'env': OrderedDict({'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/sdformat_vendor/share/gz', 'HOSTNAME': 'naj-Latitude-5520', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/root', 'OLDPWD': '/', 'ROS_PYTHON_VERSION': '3', 'container': 'podman', 'COLCON_PREFIX_PATH': '/urdf/install:/urdf/launch/install', 'ROS_DISTRO': 'jazzy', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'QT_X11_NO_MITSHM': '1', 'PATH': '/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'RTI_NC_LICENSE_ACCEPTED': 'yes', 'DISPLAY': ':0', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/urdf/install/easy:/opt/ros/jazzy', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/urdf/build/easy', 'LC_ALL': 'C.UTF-8', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/urdf/install/easy:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[0.071211] (easy) CommandEnded: {'returncode': 0}
+[0.071942] (easy) JobProgress: {'identifier': 'easy', 'progress': 'install'}
+[0.081692] (easy) Command: {'cmd': ['/usr/bin/cmake', '--install', '/urdf/build/easy'], 'cwd': '/urdf/build/easy', 'env': OrderedDict({'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/sdformat_vendor/share/gz', 'HOSTNAME': 'naj-Latitude-5520', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/root', 'OLDPWD': '/', 'ROS_PYTHON_VERSION': '3', 'container': 'podman', 'COLCON_PREFIX_PATH': '/urdf/install:/urdf/launch/install', 'ROS_DISTRO': 'jazzy', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'QT_X11_NO_MITSHM': '1', 'PATH': '/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'RTI_NC_LICENSE_ACCEPTED': 'yes', 'DISPLAY': ':0', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/urdf/install/easy:/opt/ros/jazzy', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/urdf/build/easy', 'LC_ALL': 'C.UTF-8', 'PYTHONPATH': '/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/urdf/install/easy:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor:/opt/ros/jazzy'}), 'shell': False}
+[0.090852] (easy) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[0.091540] (easy) StdoutLine: {'line': b'-- Execute custom install script\n'}
+[0.091813] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/ament_index/resource_index/package_run_dependencies/easy\n'}
+[0.092118] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/ament_index/resource_index/parent_prefix_path/easy\n'}
+[0.092416] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/environment/ament_prefix_path.sh\n'}
+[0.092649] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/environment/ament_prefix_path.dsv\n'}
+[0.092903] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/environment/path.sh\n'}
+[0.093152] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/environment/path.dsv\n'}
+[0.093385] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/local_setup.bash\n'}
+[0.093585] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/local_setup.sh\n'}
+[0.093744] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/local_setup.zsh\n'}
+[0.093919] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/local_setup.dsv\n'}
+[0.094052] (easy) StdoutLine: {'line': b'-- Symlinking: /urdf/install/easy/share/easy/package.dsv\n'}
+[0.099684] (-) TimerEvent: {}
+[0.108972] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/ament_index/resource_index/packages/easy\n'}
+[0.109376] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/cmake/easyConfig.cmake\n'}
+[0.109526] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/cmake/easyConfig-version.cmake\n'}
+[0.109705] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/package.xml\n'}
+[0.110954] (easy) StderrLine: {'line': b'\x1b[33mCMake Warning (dev) at ament_cmake_symlink_install/ament_cmake_symlink_install.cmake:67 (file):\n'}
+[0.111475] (easy) StderrLine: {'line': b'  Policy CMP0009 is not set: FILE GLOB_RECURSE calls should not follow\n'}
+[0.112521] (easy) StderrLine: {'line': b'  symlinks by default.  Run "cmake --help-policy CMP0009" for policy details.\n'}
+[0.112758] (easy) StderrLine: {'line': b'  Use the cmake_policy command to set the policy and suppress this warning.\n'}
+[0.112961] (easy) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[0.113268] (easy) StderrLine: {'line': b'  ament_cmake_symlink_install/ament_cmake_symlink_install.cmake:361 (ament_cmake_symlink_install_directory)\n'}
+[0.113513] (easy) StderrLine: {'line': b'  cmake_install.cmake:46 (include)\n'}
+[0.113658] (easy) StderrLine: {'line': b'This warning is for project developers.  Use -Wno-dev to suppress it.\n'}
+[0.113807] (easy) StderrLine: {'line': b'\x1b[0m\n'}
+[0.114009] (easy) StderrLine: {'line': b'\x1b[33mCMake Warning (dev) at ament_cmake_symlink_install/ament_cmake_symlink_install.cmake:78 (file):\n'}
+[0.114351] (easy) StderrLine: {'line': b'  Policy CMP0009 is not set: FILE GLOB_RECURSE calls should not follow\n'}
+[0.114470] (easy) StderrLine: {'line': b'  symlinks by default.  Run "cmake --help-policy CMP0009" for policy details.\n'}
+[0.114612] (easy) StderrLine: {'line': b'  Use the cmake_policy command to set the policy and suppress this warning.\n'}
+[0.114803] (easy) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[0.114929] (easy) StderrLine: {'line': b'  ament_cmake_symlink_install/ament_cmake_symlink_install.cmake:361 (ament_cmake_symlink_install_directory)\n'}
+[0.115044] (easy) StderrLine: {'line': b'  cmake_install.cmake:46 (include)\n'}
+[0.115212] (easy) StderrLine: {'line': b'This warning is for project developers.  Use -Wno-dev to suppress it.\n'}
+[0.115331] (easy) StderrLine: {'line': b'\x1b[0m\n'}
+[0.115448] (easy) StdoutLine: {'line': b'-- Symlinking: /urdf/install/easy/share/easy/launch/__pycache__/demo.launch.cpython-312.pyc\n'}
+[0.125161] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/__pycache__/move_group.launch.cpython-312.pyc\n'}
+[0.125431] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/__pycache__/moveit_rviz.launch.cpython-312.pyc\n'}
+[0.125645] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/__pycache__/rsp.launch.cpython-312.pyc\n'}
+[0.125786] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/__pycache__/spawn_controllers.launch.cpython-312.pyc\n'}
+[0.125903] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/__pycache__/static_virtual_joint_tfs.launch.cpython-312.pyc\n'}
+[0.126020] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/__pycache__/warehouse_db.launch.cpython-312.pyc\n'}
+[0.126204] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/build/.built_by\n'}
+[0.126351] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/build/COLCON_IGNORE\n'}
+[0.126527] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/demo.launch.py\n'}
+[0.126646] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/demo.launch.py-corrected\n'}
+[0.126765] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/demo.launch.py-old\n'}
+[0.126880] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/install/.colcon_install_layout\n'}
+[0.126998] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/install/COLCON_IGNORE\n'}
+[0.127352] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/install/_local_setup_util_ps1.py\n'}
+[0.127482] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/install/_local_setup_util_sh.py\n'}
+[0.127596] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/install/local_setup.bash\n'}
+[0.127708] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/install/local_setup.ps1\n'}
+[0.127817] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/install/local_setup.sh\n'}
+[0.127972] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/install/local_setup.zsh\n'}
+[0.128092] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/install/setup.bash\n'}
+[0.128192] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/install/setup.ps1\n'}
+[0.128279] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/install/setup.sh\n'}
+[0.128365] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/install/setup.zsh\n'}
+[0.128549] (easy) StdoutLine: {'line': b'-- Symlinking: /urdf/install/easy/share/easy/launch/joint_command_bridge.py\n'}
+[0.138260] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/log/COLCON_IGNORE\n'}
+[0.138695] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/log/build_2026-05-22_13-07-04/events.log\n'}
+[0.138963] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/log/build_2026-05-22_13-07-04/logger_all.log\n'}
+[0.139224] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/log/build_2026-05-22_16-45-04/events.log\n'}
+[0.139467] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/log/build_2026-05-22_16-45-04/logger_all.log\n'}
+[0.139721] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/log/latest/events.log\n'}
+[0.139924] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/log/latest/logger_all.log\n'}
+[0.140113] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/log/latest_build/events.log\n'}
+[0.140283] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/log/latest_build/logger_all.log\n'}
+[0.140584] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/move_group.launch.py\n'}
+[0.140840] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/moveit_rviz.launch.py\n'}
+[0.141020] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/rsp.launch.py\n'}
+[0.141263] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/setup_assistant.launch.py\n'}
+[0.141417] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/spawn_controllers.launch.py\n'}
+[0.141569] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/static_virtual_joint_tfs.launch.py\n'}
+[0.141764] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/launch/warehouse_db.launch.py\n'}
+[0.141907] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/controllers.yaml\n'}
+[0.142051] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/ebamk2.ros2_control.xacro\n'}
+[0.142219] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/ebamk2.ros2_control.xacro-old\n'}
+[0.142362] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/ebamk2.ros2_control.xacro-real-robot-hardware\n'}
+[0.142505] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/ebamk2.ros2_control.xacro-recent\n'}
+[0.142647] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/ebamk2.srdf\n'}
+[0.142789] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/ebamk2.srdf-old\n'}
+[0.143026] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/ebamk2.urdf.xacro\n'}
+[0.143184] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/ebamk2_mesh.urdf\n'}
+[0.143320] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/initial_positions.yaml\n'}
+[0.143455] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/joint_limits.yaml\n'}
+[0.143636] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/kinematics.yaml\n'}
+[0.143770] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/moveit.rviz\n'}
+[0.143895] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/moveit_controllers.yaml\n'}
+[0.144020] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/moveit_controllers.yaml-old\n'}
+[0.144149] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/ompl_planning.yaml\n'}
+[0.144251] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/pilz_cartesian_limits.yaml\n'}
+[0.144352] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/config/ros2_controllers.yaml\n'}
+[0.144452] (easy) StdoutLine: {'line': b'-- Up-to-date symlink: /urdf/install/easy/share/easy/.setup_assistant\n'}
+[0.146511] (easy) CommandEnded: {'returncode': 0}
+[0.167472] (easy) JobEnded: {'identifier': 'easy', 'rc': 0}
+[0.168435] (-) EventReactorShutdown: {}

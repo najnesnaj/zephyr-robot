@@ -1,0 +1,183 @@
+14a15
+> #include <std_msgs/msg/float32.h>
+32,48d32
+< #define M_PI 3.14159265358979323846f
+< /*these parameters are calibration values obtained while using rviz, where the simulated robot has to match the real one*/
+< 
+< #define JOINT1_OFFSET  2.903821818033854
+< #define JOINT2_OFFSET  1.3882471720377605
+< #define JOINT3_OFFSET  3.4131018744574653
+< 
+< #define JOINT1_DIR 1
+< #define JOINT2_DIR -1 
+< #define JOINT3_DIR 1 
+< 
+< /*since the encoder is on the steppermotor, which rotates more than the robot arm because of gears / reduction*/
+< #define JOINT1_RED 6
+< #define JOINT2_RED 3 
+< #define JOINT3_RED 3 
+< 
+< 
+54a39
+> #define MAX_JOINTS 10
+83,84c68,69
+< rcl_publisher_t joint_state_publisher;
+< static sensor_msgs__msg__JointState joint_state_pub_msg;
+---
+> rcl_publisher_t angle_publisher[3];
+> std_msgs__msg__Float32 angle_msg[3];
+209d193
+<     LOG_INF_PUBLISH("joint_commands_callback");
+211,212c195,197
+<     if (msg->name.size != 5 || msg->position.size != 5) {
+<         LOG_ERR_PUBLISH("Invalid JointState: expected 5 names and 5 positions");
+---
+>     size_t n = msg->position.size;
+>     if (n < 3) {
+>         LOG_WRN_PUBLISH("JointState: need >=3 positions, got %zu", n);
+214a200,203
+>     if (n > MAX_JOINTS) {
+>         LOG_WRN_PUBLISH("JointState: %zu positions truncated to %d", n, MAX_JOINTS);
+>         n = MAX_JOINTS;
+>     }
+216,227c205
+<     LOG_INF_PUBLISH("Received JointState: [%.*s, %.*s, %.*s, %.*s, %.*s]", 
+<             (int)msg->name.data[0].size, msg->name.data[0].data,
+<             (int)msg->name.data[1].size, msg->name.data[1].data,
+<             (int)msg->name.data[2].size, msg->name.data[2].data,
+<             (int)msg->name.data[3].size, msg->name.data[3].data,
+<             (int)msg->name.data[4].size, msg->name.data[4].data);
+<     LOG_INF_PUBLISH("Positions: [%.4f, %.4f, %.4f, %.4f, %.4f] rad",
+<             (double)msg->position.data[0], 
+<             (double)msg->position.data[1], 
+<             (double)msg->position.data[2],
+<             (double)msg->position.data[3],
+<             (double)msg->position.data[4]);
+---
+>     LOG_INF_PUBLISH("joint_commands_callback: %zu joints", n);
+275,283c253,263
+<     float enc1_deg = (float)encoder1_angle.val1 + (float)encoder1_angle.val2 / 1000000.0f;
+<     float enc2_deg = (float)encoder2_angle.val1 + (float)encoder2_angle.val2 / 1000000.0f;
+<     float enc3_deg = (float)encoder3_angle.val1 + (float)encoder3_angle.val2 / 1000000.0f;
+< /*TODO the as5600 0 is joint2 and vice versa */
+<     joint_state_pub_msg.position.data[2] = ((double)(enc1_deg * M_PI / 180.0) - JOINT1_OFFSET) * JOINT1_DIR / JOINT1_RED;
+<     joint_state_pub_msg.position.data[1] = ((double)(enc2_deg * M_PI / 180.0) - JOINT2_OFFSET) * JOINT2_DIR / JOINT2_RED;
+<     joint_state_pub_msg.position.data[0] = ((double)(enc3_deg * M_PI / 180.0) - JOINT3_OFFSET) * JOINT3_DIR / JOINT3_RED;
+<     joint_state_pub_msg.position.data[3] = 0.0;
+<     joint_state_pub_msg.position.data[4] = 0.0;
+---
+>     float enc1 = (float)encoder1_angle.val1 + (float)encoder1_angle.val2 / 1000000.0f;
+>     float enc2 = (float)encoder2_angle.val1 + (float)encoder2_angle.val2 / 1000000.0f;
+>     float enc3 = (float)encoder3_angle.val1 + (float)encoder3_angle.val2 / 1000000.0f;
+> 
+>     angle_msg[0].data = enc1;
+>     angle_msg[1].data = enc2;
+>     angle_msg[2].data = enc3;
+> 
+>     RCSOFTCHECK(rcl_publish(&angle_publisher[0], (const void*)&angle_msg[0], NULL));
+>     RCSOFTCHECK(rcl_publish(&angle_publisher[1], (const void*)&angle_msg[1], NULL));
+>     RCSOFTCHECK(rcl_publish(&angle_publisher[2], (const void*)&angle_msg[2], NULL));
+285,296c265
+<     uint64_t now_ns = rmw_uros_epoch_nanos();
+<     joint_state_pub_msg.header.stamp.sec = now_ns / 1000000000ULL;
+<     joint_state_pub_msg.header.stamp.nanosec = now_ns % 1000000000ULL;
+< 
+<     RCSOFTCHECK(rcl_publish(&joint_state_publisher, (const void*)&joint_state_pub_msg, NULL));
+< 
+<     LOG_INF_PUBLISH("Published /joint_states: [%.4f, %.4f, %.4f, %.4f, %.4f] rad",
+<             joint_state_pub_msg.position.data[0],
+<             joint_state_pub_msg.position.data[1],
+<             joint_state_pub_msg.position.data[2],
+<             joint_state_pub_msg.position.data[3],
+<             joint_state_pub_msg.position.data[4]);
+---
+>     LOG_INF_PUBLISH("Published encoder angles: %.2f, %.2f, %.2f", (double)enc1, (double)enc2, (double)enc3);
+310c279
+<     LOG_INF_PUBLISH("Starting combined joint+encoder micro-ROS Controller...");
+---
+>     LOG_INF_PUBLISH("Starting joint+encoder micro-ROS Controller...");
+416,438c385,391
+<     /* === Publisher: /joint_states (encoder positions in radians) === */
+<     sensor_msgs__msg__JointState__init(&joint_state_pub_msg);
+< 
+<     joint_state_pub_msg.name.capacity = 5;
+<     joint_state_pub_msg.name.size = 5;
+<     joint_state_pub_msg.name.data = (rosidl_runtime_c__String *)
+<         malloc(joint_state_pub_msg.name.capacity * sizeof(rosidl_runtime_c__String));
+<     for (size_t i = 0; i < joint_state_pub_msg.name.capacity; i++) {
+<         joint_state_pub_msg.name.data[i].capacity = 20;
+<         joint_state_pub_msg.name.data[i].size = 0;
+<         joint_state_pub_msg.name.data[i].data = (char *)
+<             malloc(joint_state_pub_msg.name.data[i].capacity * sizeof(char));
+<     }
+<     rosidl_runtime_c__String__assign(&joint_state_pub_msg.name.data[0], "joint_1");
+<     rosidl_runtime_c__String__assign(&joint_state_pub_msg.name.data[1], "joint_2");
+<     rosidl_runtime_c__String__assign(&joint_state_pub_msg.name.data[2], "joint_3");
+<     rosidl_runtime_c__String__assign(&joint_state_pub_msg.name.data[3], "joint_4");
+<     rosidl_runtime_c__String__assign(&joint_state_pub_msg.name.data[4], "joint_6");
+< 
+<     joint_state_pub_msg.position.capacity = 5;
+<     joint_state_pub_msg.position.size = 5;
+<     joint_state_pub_msg.position.data = (double *)
+<         malloc(joint_state_pub_msg.position.capacity * sizeof(double));
+---
+>     /* === Publishers (AS5600 angles) === */
+>     RCCHECK(rclc_publisher_init_default(&angle_publisher[0], &node,
+>         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32), "/encoder1/angle"));
+>     RCCHECK(rclc_publisher_init_default(&angle_publisher[1], &node,
+>         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32), "/encoder2/angle"));
+>     RCCHECK(rclc_publisher_init_default(&angle_publisher[2], &node,
+>         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32), "/encoder3/angle"));
+440,443c393
+<     RCCHECK(rclc_publisher_init_default(&joint_state_publisher, &node,
+<         ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, JointState), "/joint_states"));
+< 
+<     LOG_INF_PUBLISH("/joint_states publisher initialized");
+---
+>     LOG_INF_PUBLISH("AS5600 angle publishers initialized");
+465,466c415,417
+<     /* === Allocate JointState subscriber message memory === */
+<     joint_state_msg.name.capacity = 5;
+---
+>     /* === Allocate JointState message memory === */
+>     rcl_allocator_t alloc = rcl_get_default_allocator();
+>     joint_state_msg.name.capacity = MAX_JOINTS;
+469,472c420,428
+<         malloc(joint_state_msg.name.capacity * sizeof(rosidl_runtime_c__String));
+< 
+<     for (size_t i = 0; i < joint_state_msg.name.capacity; i++) {
+<         joint_state_msg.name.data[i].capacity = 20;
+---
+>         alloc.allocate(MAX_JOINTS * sizeof(rosidl_runtime_c__String), alloc.state);
+>     if (!joint_state_msg.name.data) {
+>         LOG_ERR_PUBLISH("malloc failed for joint_state_msg.name.data");
+>         return 0;
+>     }
+>     memset(joint_state_msg.name.data, 0,
+>            MAX_JOINTS * sizeof(rosidl_runtime_c__String));
+>     for (size_t i = 0; i < MAX_JOINTS; i++) {
+>         joint_state_msg.name.data[i].capacity = 32;
+475c431,435
+<             malloc(joint_state_msg.name.data[i].capacity * sizeof(char));
+---
+>             alloc.allocate(32 * sizeof(char), alloc.state);
+>         if (!joint_state_msg.name.data[i].data) {
+>             LOG_ERR_PUBLISH("malloc failed for name[%zu].data", i);
+>             return 0;
+>         }
+478c438
+<     joint_state_msg.position.capacity = 5;
+---
+>     joint_state_msg.position.capacity = MAX_JOINTS;
+481c441,445
+<         malloc(joint_state_msg.position.capacity * sizeof(double));
+---
+>         alloc.allocate(MAX_JOINTS * sizeof(double), alloc.state);
+>     if (!joint_state_msg.position.data) {
+>         LOG_ERR_PUBLISH("malloc failed for joint_state_msg.position.data");
+>         return 0;
+>     }
+498c462
+<     LOG_INF_PUBLISH("Publishing encoder positions to /joint_states");
+---
+>     LOG_INF_PUBLISH("Publishing to /encoder1/angle, /encoder2/angle, /encoder3/angle");

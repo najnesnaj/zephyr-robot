@@ -36,6 +36,7 @@ static const uint32_t max_pulse = DT_PROP(DT_NODELABEL(servo), max_pulse);
 
 LOG_MODULE_REGISTER(joint_stepper_microros, LOG_LEVEL_INF);
 
+#define MAX_JOINTS 10
 #define ANGLE_TO_STEPS(angle_rad)  ((int32_t)((angle_rad) * 509.3))
 
 const struct device *stepper0_dev;
@@ -190,21 +191,18 @@ void gripper_commands_callback(const void *msgin)
 void joint_commands_callback(const void *msgin)
 {
     const sensor_msgs__msg__JointState *msg = (const sensor_msgs__msg__JointState *)msgin;
-    LOG_INF_PUBLISH("joint_commands_callback");
 
-    if (msg->name.size != 3 || msg->position.size != 3) {
-        LOG_ERR_PUBLISH("Invalid JointState: expected 3 names and 3 positions");
+    size_t n = msg->position.size;
+    if (n < 3) {
+        LOG_WRN_PUBLISH("JointState: need >=3 positions, got %zu", n);
         return;
     }
+    if (n > MAX_JOINTS) {
+        LOG_WRN_PUBLISH("JointState: %zu positions truncated to %d", n, MAX_JOINTS);
+        n = MAX_JOINTS;
+    }
 
-    LOG_INF_PUBLISH("Received JointState: [%.*s, %.*s, %.*s]", 
-            (int)msg->name.data[0].size, msg->name.data[0].data,
-            (int)msg->name.data[1].size, msg->name.data[1].data,
-            (int)msg->name.data[2].size, msg->name.data[2].data);
-    LOG_INF_PUBLISH("Positions: [%.4f, %.4f, %.4f] rad",
-            (double)msg->position.data[0], 
-            (double)msg->position.data[1], 
-            (double)msg->position.data[2]);
+    LOG_INF_PUBLISH("joint_commands_callback: %zu joints", n);
 
     int32_t target_steps0 = ANGLE_TO_STEPS(msg->position.data[0]);
     int32_t delta0 = target_steps0 - current_microsteps0;
@@ -415,22 +413,36 @@ int main(void)
         "/gripper_cmd"));
 
     /* === Allocate JointState message memory === */
-    joint_state_msg.name.capacity = 3;
+    rcl_allocator_t alloc = rcl_get_default_allocator();
+    joint_state_msg.name.capacity = MAX_JOINTS;
     joint_state_msg.name.size = 0;
     joint_state_msg.name.data = (rosidl_runtime_c__String *)
-        malloc(joint_state_msg.name.capacity * sizeof(rosidl_runtime_c__String));
-
-    for (size_t i = 0; i < joint_state_msg.name.capacity; i++) {
-        joint_state_msg.name.data[i].capacity = 20;
+        alloc.allocate(MAX_JOINTS * sizeof(rosidl_runtime_c__String), alloc.state);
+    if (!joint_state_msg.name.data) {
+        LOG_ERR_PUBLISH("malloc failed for joint_state_msg.name.data");
+        return 0;
+    }
+    memset(joint_state_msg.name.data, 0,
+           MAX_JOINTS * sizeof(rosidl_runtime_c__String));
+    for (size_t i = 0; i < MAX_JOINTS; i++) {
+        joint_state_msg.name.data[i].capacity = 32;
         joint_state_msg.name.data[i].size = 0;
         joint_state_msg.name.data[i].data = (char *)
-            malloc(joint_state_msg.name.data[i].capacity * sizeof(char));
+            alloc.allocate(32 * sizeof(char), alloc.state);
+        if (!joint_state_msg.name.data[i].data) {
+            LOG_ERR_PUBLISH("malloc failed for name[%zu].data", i);
+            return 0;
+        }
     }
 
-    joint_state_msg.position.capacity = 3;
+    joint_state_msg.position.capacity = MAX_JOINTS;
     joint_state_msg.position.size = 0;
     joint_state_msg.position.data = (double *)
-        malloc(joint_state_msg.position.capacity * sizeof(double));
+        alloc.allocate(MAX_JOINTS * sizeof(double), alloc.state);
+    if (!joint_state_msg.position.data) {
+        LOG_ERR_PUBLISH("malloc failed for joint_state_msg.position.data");
+        return 0;
+    }
 
     /* === Executor (2 subscriptions + 1 timer = 3 handles) === */
     rclc_executor_t executor = rclc_executor_get_zero_initialized_executor();

@@ -45,6 +45,7 @@
 #define JOINT2_RED 3 
 #define JOINT3_RED 3 
 
+#define MAX_JOINTS 10
 
 static const struct pwm_dt_spec servo = PWM_DT_SPEC_GET(DT_NODELABEL(servo));
 static const uint32_t min_pulse = DT_PROP(DT_NODELABEL(servo), min_pulse);
@@ -463,22 +464,46 @@ int main(void)
         "/gripper_cmd"));
 
     /* === Allocate JointState subscriber message memory === */
-    joint_state_msg.name.capacity = 5;
+    rcl_allocator_t alloc = rcl_get_default_allocator();
+    joint_state_msg.name.capacity = MAX_JOINTS;
     joint_state_msg.name.size = 0;
     joint_state_msg.name.data = (rosidl_runtime_c__String *)
-        malloc(joint_state_msg.name.capacity * sizeof(rosidl_runtime_c__String));
+        //malloc(joint_state_msg.name.capacity * sizeof(rosidl_runtime_c__String));
+        alloc.allocate(MAX_JOINTS * sizeof(rosidl_runtime_c__String), alloc.state);
 
-    for (size_t i = 0; i < joint_state_msg.name.capacity; i++) {
-        joint_state_msg.name.data[i].capacity = 20;
+    if (!joint_state_msg.name.data) {
+        LOG_ERR_PUBLISH("malloc failed for joint_state_msg.name.data");
+        return 0;
+    } 
+
+    memset(joint_state_msg.name.data, 0,
+           MAX_JOINTS * sizeof(rosidl_runtime_c__String));
+ 
+
+
+    //for (size_t i = 0; i < joint_state_msg.name.capacity; i++) {
+    for (size_t i = 0; i < MAX_JOINTS; i++) {
+        joint_state_msg.name.data[i].capacity = 32;
         joint_state_msg.name.data[i].size = 0;
         joint_state_msg.name.data[i].data = (char *)
-            malloc(joint_state_msg.name.data[i].capacity * sizeof(char));
+            //malloc(joint_state_msg.name.data[i].capacity * sizeof(char));
+           alloc.allocate(32 * sizeof(char), alloc.state);
+        if (!joint_state_msg.name.data) {
+        LOG_ERR_PUBLISH("malloc failed for joint_state_msg.name.data");
+        return 0;
+        }
+
     }
 
-    joint_state_msg.position.capacity = 5;
+    joint_state_msg.position.capacity = MAX_JOINTS;
     joint_state_msg.position.size = 0;
     joint_state_msg.position.data = (double *)
-        malloc(joint_state_msg.position.capacity * sizeof(double));
+        //malloc(joint_state_msg.position.capacity * sizeof(double));
+        alloc.allocate(MAX_JOINTS * sizeof(double), alloc.state);
+    if (!joint_state_msg.position.data) {
+        LOG_ERR_PUBLISH("malloc failed for joint_state_msg.position.data");
+        return 0;
+    }
 
     /* === Executor (2 subscriptions + 1 timer = 3 handles) === */
     rclc_executor_t executor = rclc_executor_get_zero_initialized_executor();

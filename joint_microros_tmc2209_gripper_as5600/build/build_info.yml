@@ -58,6 +58,6 @@ cmake:
     zephyr-base: '/home/naj/zephyrproject/zephyr'
 version: '0.1.0'
 west:
-  command: '/home/naj/zephyrproject/.venv/bin/west build -p auto -b blackpill_f411ce /home/naj/zephyrproject/joint_microros_tmc2209_gripper_as5600'
+  command: '/home/naj/zephyrproject/.venv/bin/west build -b blackpill_f411ce --pristine'
   topdir: '/home/naj/zephyrproject'
   version: '1.5.0'
