@@ -29,7 +29,7 @@
 #define AS5600_2 DT_NODELABEL(as5600_2)
 #define AS5600_3 DT_NODELABEL(as5600_3)
 
-#define M_PI 3.14159265358979323846f
+#define M_PI 3.14159265358979323846
 /*these parameters are calibration values obtained while using rviz, where the simulated robot has to match the real one*/
 
 #define JOINT1_OFFSET  2.903821818033854
@@ -90,11 +90,12 @@ void micro_ros_log_init(rcl_node_t *node)
     log_msg.msg.data = (char *)malloc(log_msg.msg.capacity * sizeof(char));
     log_msg.msg.size = 0;
 
-    rcl_publisher_options_t pub_opts = rcl_publisher_get_default_options();
+    rcl_publisher_options_t pub_ops = rcl_publisher_get_default_options();
+
     rcl_ret_t ret = rcl_publisher_init(&log_publisher, node,
                        ROSIDL_GET_MSG_TYPE_SUPPORT(rcl_interfaces, msg, Log),
                        "/micro_ros/log",
-                       &pub_opts);
+                       &pub_ops);
     if (ret != RCL_RET_OK) {
         printk("micro-ROS log publisher init failed: %d\n", ret);
     }
@@ -109,7 +110,8 @@ void micro_ros_log_publish(const char *msg, int level)
 
     rosidl_runtime_c__String__assign(&log_msg.msg, msg);
 
-   (void)rcl_publish(&log_publisher, &log_msg, NULL);
+    rcl_ret_t pub_ret = rcl_publish(&log_publisher, &log_msg, NULL);
+    (void)pub_ret;
 }
 
 #define LOG_INF_PUBLISH(...) do { \
@@ -214,7 +216,7 @@ void joint_commands_callback(const void *msgin)
         return;
     }
 
-    LOG_INF_PUBLISH("Received JointState: [%.*s, %.*s, %.*s, %.*s, %.*s]", 
+/*    LOG_INF_PUBLISH("Received JointState: [%.*s, %.*s, %.*s, %.*s, %.*s]", 
             (int)msg->name.data[0].size, msg->name.data[0].data,
             (int)msg->name.data[1].size, msg->name.data[1].data,
             (int)msg->name.data[2].size, msg->name.data[2].data,
@@ -226,7 +228,7 @@ void joint_commands_callback(const void *msgin)
             (double)msg->position.data[2],
             (double)msg->position.data[3],
             (double)msg->position.data[4]);
-
+*/
     int32_t target_steps0 = ANGLE_TO_STEPS(msg->position.data[0]);
     int32_t delta0 = target_steps0 - current_microsteps0;
     int ret0 = stepper_ctrl_move_by(stepper0_dev, delta0);
@@ -273,13 +275,13 @@ void angle_timer_callback(rcl_timer_t *timer, int64_t last_call_time)
     sensor_sample_fetch(as5600_3_dev);
     sensor_channel_get(as5600_3_dev, SENSOR_CHAN_ROTATION, &encoder3_angle);
 
-    float enc1_deg = (float)encoder1_angle.val1 + (float)encoder1_angle.val2 / 1000000.0f;
-    float enc2_deg = (float)encoder2_angle.val1 + (float)encoder2_angle.val2 / 1000000.0f;
-    float enc3_deg = (float)encoder3_angle.val1 + (float)encoder3_angle.val2 / 1000000.0f;
+    double enc1_deg = (double)encoder1_angle.val1 + (double)encoder1_angle.val2 / 1000000.0;
+    double enc2_deg = (double)encoder2_angle.val1 + (double)encoder2_angle.val2 / 1000000.0;
+    double enc3_deg = (double)encoder3_angle.val1 + (double)encoder3_angle.val2 / 1000000.0;
 /*TODO the as5600 0 is joint2 and vice versa */
-    joint_state_pub_msg.position.data[2] = ((double)(enc1_deg * M_PI / 180.0) - JOINT1_OFFSET) * JOINT1_DIR / JOINT1_RED;
-    joint_state_pub_msg.position.data[1] = ((double)(enc2_deg * M_PI / 180.0) - JOINT2_OFFSET) * JOINT2_DIR / JOINT2_RED;
-    joint_state_pub_msg.position.data[0] = ((double)(enc3_deg * M_PI / 180.0) - JOINT3_OFFSET) * JOINT3_DIR / JOINT3_RED;
+    joint_state_pub_msg.position.data[2] = ((enc1_deg * M_PI / 180.0) - JOINT1_OFFSET) * JOINT1_DIR / JOINT1_RED;
+    joint_state_pub_msg.position.data[1] = ((enc2_deg * M_PI / 180.0) - JOINT2_OFFSET) * JOINT2_DIR / JOINT2_RED;
+    joint_state_pub_msg.position.data[0] = ((enc3_deg * M_PI / 180.0) - JOINT3_OFFSET) * JOINT3_DIR / JOINT3_RED;
     joint_state_pub_msg.position.data[3] = 0.0;
     joint_state_pub_msg.position.data[4] = 0.0;
 
@@ -448,9 +450,22 @@ int main(void)
     RCCHECK(rclc_timer_init_default2(&angle_timer, &support,
         RCL_MS_TO_NS(1000), angle_timer_callback, true));
 
+
+
+    // Voorbeeld in micro-ROS C code:
+    //rcl_subscription_options_t subscription_ops = rcl_get_default_subscription_options();
+
+    // Belangrijk: Zet de wachtrij op 1. Oude berichten worden direct overschreven i.p.v. opgeslagen in het RAM.
+    //subscription_ops.qos.depth = 1; 
+    //subscription_ops.qos.reliability = RMW_QOS_POLICY_RELIABILITY_BEST_EFFORT;
+
+
+
+
     /* === Subscribers === */
     sensor_msgs__msg__JointState__init(&joint_state_msg);
-    RCCHECK(rclc_subscription_init_default(
+    //RCCHECK(rclc_subscription_init_default(
+    RCCHECK(rclc_subscription_init_best_effort(
         &joint_commands_subscriber,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, JointState),
@@ -529,8 +544,11 @@ int main(void)
     }
 
     /* Cleanup */
-    (void)rcl_subscription_fini(&joint_commands_subscriber, &node);
-    (void)rcl_node_fini(&node);
+    rcl_ret_t cleanup_ret;
+    cleanup_ret = rcl_subscription_fini(&joint_commands_subscriber, &node);
+    (void)cleanup_ret;
+    cleanup_ret = rcl_node_fini(&node);
+    (void)cleanup_ret;
     (void)rclc_support_fini(&support);
 
     return 0;

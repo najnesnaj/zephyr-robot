@@ -1,0 +1,69 @@
+[0.013s] Invoking command in '/urdf/build/easy': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /urdf -DCMAKE_INSTALL_PREFIX=/urdf/install/easy
+[0.066s] -- The C compiler identification is GNU 13.3.0
+[0.124s] -- The CXX compiler identification is GNU 13.3.0
+[0.141s] -- Detecting C compiler ABI info
+[0.238s] -- Detecting C compiler ABI info - done
+[0.246s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.246s] -- Detecting C compile features
+[0.247s] -- Detecting C compile features - done
+[0.254s] -- Detecting CXX compiler ABI info
+[0.366s] -- Detecting CXX compiler ABI info - done
+[0.374s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.374s] -- Detecting CXX compile features
+[0.374s] -- Detecting CXX compile features - done
+[0.380s] -- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.515s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[0.766s] -- Configuring done (0.7s)
+[0.768s] -- Generating done (0.0s)
+[0.769s] -- Build files have been written to: /urdf/build/easy
+[0.774s] Invoked command in '/urdf/build/easy' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /urdf -DCMAKE_INSTALL_PREFIX=/urdf/install/easy
+[0.776s] Invoking command in '/urdf/build/easy': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /urdf/build/easy -- -j8 -l8
+[0.818s] Invoked command in '/urdf/build/easy' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /urdf/build/easy -- -j8 -l8
+[0.827s] Invoking command in '/urdf/build/easy': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /urdf/build/easy
+[0.836s] -- Install configuration: ""
+[0.836s] -- Installing: /urdf/install/easy/share/ament_index/resource_index/package_run_dependencies/easy
+[0.836s] -- Installing: /urdf/install/easy/share/ament_index/resource_index/parent_prefix_path/easy
+[0.836s] -- Installing: /urdf/install/easy/share/easy/environment/ament_prefix_path.sh
+[0.836s] -- Installing: /urdf/install/easy/share/easy/environment/ament_prefix_path.dsv
+[0.837s] -- Installing: /urdf/install/easy/share/easy/environment/path.sh
+[0.838s] -- Installing: /urdf/install/easy/share/easy/environment/path.dsv
+[0.838s] -- Installing: /urdf/install/easy/share/easy/local_setup.bash
+[0.838s] -- Installing: /urdf/install/easy/share/easy/local_setup.sh
+[0.838s] -- Installing: /urdf/install/easy/share/easy/local_setup.zsh
+[0.838s] -- Installing: /urdf/install/easy/share/easy/local_setup.dsv
+[0.839s] -- Installing: /urdf/install/easy/share/easy/package.dsv
+[0.839s] -- Installing: /urdf/install/easy/share/ament_index/resource_index/packages/easy
+[0.839s] -- Installing: /urdf/install/easy/share/easy/cmake/easyConfig.cmake
+[0.839s] -- Installing: /urdf/install/easy/share/easy/cmake/easyConfig-version.cmake
+[0.839s] -- Installing: /urdf/install/easy/share/easy/package.xml
+[0.839s] -- Installing: /urdf/install/easy/share/easy/launch
+[0.839s] -- Installing: /urdf/install/easy/share/easy/launch/moveit_rviz.launch.py
+[0.839s] -- Installing: /urdf/install/easy/share/easy/launch/move_group.launch.py-jj
+[0.841s] -- Installing: /urdf/install/easy/share/easy/launch/demo.launch.py
+[0.841s] -- Installing: /urdf/install/easy/share/easy/launch/spawn_controllers.launch.py
+[0.841s] -- Installing: /urdf/install/easy/share/easy/launch/static_virtual_joint_tfs.launch.py
+[0.841s] -- Installing: /urdf/install/easy/share/easy/launch/move_group.launch.py-old
+[0.841s] -- Installing: /urdf/install/easy/share/easy/launch/move_group.launch.py
+[0.841s] -- Installing: /urdf/install/easy/share/easy/launch/rsp.launch.py
+[0.842s] -- Installing: /urdf/install/easy/share/easy/launch/setup_assistant.launch.py
+[0.842s] -- Installing: /urdf/install/easy/share/easy/launch/warehouse_db.launch.py
+[0.842s] -- Installing: /urdf/install/easy/share/easy/launch/__pycache__
+[0.842s] -- Installing: /urdf/install/easy/share/easy/launch/__pycache__/static_virtual_joint_tfs.launch.cpython-312.pyc
+[0.842s] -- Installing: /urdf/install/easy/share/easy/launch/__pycache__/warehouse_db.launch.cpython-312.pyc
+[0.842s] -- Installing: /urdf/install/easy/share/easy/launch/__pycache__/move_group.launch.cpython-312.pyc
+[0.842s] -- Installing: /urdf/install/easy/share/easy/launch/__pycache__/rsp.launch.cpython-312.pyc
+[0.842s] -- Installing: /urdf/install/easy/share/easy/launch/__pycache__/spawn_controllers.launch.cpython-312.pyc
+[0.842s] -- Installing: /urdf/install/easy/share/easy/launch/__pycache__/demo.launch.cpython-312.pyc
+[0.842s] -- Installing: /urdf/install/easy/share/easy/launch/__pycache__/moveit_rviz.launch.cpython-312.pyc
+[0.842s] -- Installing: /urdf/install/easy/share/easy/config
+[0.842s] -- Installing: /urdf/install/easy/share/easy/config/kinematics.yaml
+[0.842s] -- Installing: /urdf/install/easy/share/easy/config/ompl_planning.yaml
+[0.842s] -- Installing: /urdf/install/easy/share/easy/config/ebamk2.urdf.xacro
+[0.843s] -- Installing: /urdf/install/easy/share/easy/config/initial_positions.yaml
+[0.843s] -- Installing: /urdf/install/easy/share/easy/config/joint_limits.yaml
+[0.843s] -- Installing: /urdf/install/easy/share/easy/config/moveit.rviz
+[0.843s] -- Installing: /urdf/install/easy/share/easy/config/ebamk2.ros2_control.xacro
+[0.843s] -- Installing: /urdf/install/easy/share/easy/config/ebamk2.srdf
+[0.843s] -- Installing: /urdf/install/easy/share/easy/config/pilz_cartesian_limits.yaml
+[0.843s] -- Installing: /urdf/install/easy/share/easy/.setup_assistant
+[0.844s] Invoked command in '/urdf/build/easy' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /urdf/build/easy

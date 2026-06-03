@@ -24,6 +24,8 @@
 /urdf/install/easy/share/easy/launch/build/COLCON_IGNORE
 /urdf/install/easy/share/easy/launch/demo.launch.py
 /urdf/install/easy/share/easy/launch/demo.launch.py-corrected
+/urdf/install/easy/share/easy/launch/demo.launch.py-deepseek
+/urdf/install/easy/share/easy/launch/demo.launch.py-jj
 /urdf/install/easy/share/easy/launch/demo.launch.py-old
 /urdf/install/easy/share/easy/launch/install/.colcon_install_layout
 /urdf/install/easy/share/easy/launch/install/COLCON_IGNORE

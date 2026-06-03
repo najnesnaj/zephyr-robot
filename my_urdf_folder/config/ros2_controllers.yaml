@@ -15,7 +15,7 @@ ebamk2_controller:
       - joint_2
       - joint_3
       - joint_4
-      - joint_6
+      #- joint_6
       # Add joint_6 if you want the gripper controlled via trajectory (optional)
 
     command_interfaces:

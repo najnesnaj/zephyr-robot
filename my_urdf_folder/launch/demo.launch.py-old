@@ -113,7 +113,6 @@ def generate_launch_description():
     # Load moveit_controllers.yaml as parameters for move_group
     move_group_params = [
         {'robot_description': robot_description},
-        {'robot_description_semantic': robot_description_semantic},   # if you have it
         moveit_controllers_path,
         # Add other moveit config files if needed (planning_pipeline, etc.)
     ]
