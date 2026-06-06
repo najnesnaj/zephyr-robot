@@ -1,0 +1,17 @@
+# Robot-specific calibration parameters
+joint_calibration_node:
+  ros__parameters:
+    joints:
+      joint_1:
+        offset: 2.903821818033854
+        direction: 1
+        reduction: 6.0
+      joint_2:
+        offset: 1.3882471720377605
+        direction: -1
+        reduction: 3.0
+      joint_3:
+        offset: 3.4131018744574653
+        direction: 1
+        reduction: 3.0
+

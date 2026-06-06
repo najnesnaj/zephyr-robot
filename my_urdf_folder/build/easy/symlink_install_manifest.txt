@@ -39,7 +39,8 @@
 /urdf/install/easy/share/easy/launch/install/setup.ps1
 /urdf/install/easy/share/easy/launch/install/setup.sh
 /urdf/install/easy/share/easy/launch/install/setup.zsh
-/urdf/install/easy/share/easy/launch/joint_command_bridge.py
+/urdf/install/easy/share/easy/launch/joint_command_bridge
+/urdf/install/easy/share/easy/launch/joint_command_bridge.py-old
 /urdf/install/easy/share/easy/launch/log/COLCON_IGNORE
 /urdf/install/easy/share/easy/launch/log/build_2026-05-22_13-07-04/events.log
 /urdf/install/easy/share/easy/launch/log/build_2026-05-22_13-07-04/logger_all.log
@@ -51,11 +52,13 @@
 /urdf/install/easy/share/easy/launch/log/latest_build/logger_all.log
 /urdf/install/easy/share/easy/launch/move_group.launch.py
 /urdf/install/easy/share/easy/launch/moveit_rviz.launch.py
+/urdf/install/easy/share/easy/launch/my_calibration_processor
 /urdf/install/easy/share/easy/launch/rsp.launch.py
 /urdf/install/easy/share/easy/launch/setup_assistant.launch.py
 /urdf/install/easy/share/easy/launch/spawn_controllers.launch.py
 /urdf/install/easy/share/easy/launch/static_virtual_joint_tfs.launch.py
 /urdf/install/easy/share/easy/launch/warehouse_db.launch.py
+/urdf/install/easy/share/easy/config/calibration.yaml
 /urdf/install/easy/share/easy/config/controllers.yaml
 /urdf/install/easy/share/easy/config/ebamk2.ros2_control.xacro
 /urdf/install/easy/share/easy/config/ebamk2.ros2_control.xacro-real-robot-hardware
@@ -72,3 +75,5 @@
 /urdf/install/easy/share/easy/config/pilz_cartesian_limits.yaml
 /urdf/install/easy/share/easy/config/ros2_controllers.yaml
 /urdf/install/easy/share/easy/.setup_assistant
+/urdf/install/easy/lib/easy/joint_command_bridge
+/urdf/install/easy/lib/easy/my_calibration_processor

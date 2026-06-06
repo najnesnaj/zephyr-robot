@@ -14,3 +14,8 @@ endif()
 
 install(DIRECTORY config DESTINATION share/${PROJECT_NAME})
 install(FILES .setup_assistant DESTINATION share/${PROJECT_NAME})
+install(PROGRAMS launch/joint_command_bridge
+  DESTINATION lib/${PROJECT_NAME})
+install(PROGRAMS launch/my_calibration_processor
+  DESTINATION lib/${PROJECT_NAME})
+

@@ -1,0 +1,57 @@
+#!/usr/bin/env python3
+import rclpy
+from rclpy.node import Node
+from sensor_msgs.msg import JointState
+
+class JointCalibrationProcessor(Node):
+    def __init__(self):
+        super().__init__('joint_calibration_node')
+        
+        # Declareer de parameters (deze worden automatisch gevuld vanuit je calibration.yaml)
+        self.declare_parameters(
+            namespace='',
+            parameters=[
+                ('joints.joint1.offset', 0.0), ('joints.joint1.direction', 1), ('joints.joint1.reduction', 1.0),
+                ('joints.joint2.offset', 0.0), ('joints.joint2.direction', 1), ('joints.joint2.reduction', 1.0),
+                ('joints.joint3.offset', 0.0), ('joints.joint3.direction', 1), ('joints.joint3.reduction', 1.0),
+            ]
+        )
+
+        # Subcribe op de RAUWE data van micro-ROS (bijv. '/micro_ros/raw_joints')
+        self.subscription = self.create_subscription(JointState, '/micro_ros/raw_joints', self.listener_callback, 10)
+        
+        # Publisher naar de echte /joint_states waar RViz naar luistert
+        self.publisher = self.create_publisher(JointState, '/joint_states', 10)
+
+    def listener_callback(self, msg):
+        calibrated_msg = JointState()
+        calibrated_msg.header = msg.header
+        calibrated_msg.name = msg.name
+
+        for name in msg.name:
+            # Haal de index op van de joint in het inkomende bericht
+            idx = msg.name.index(name)
+            raw_pos = msg.position[idx]
+
+            # Haal de specifieke kalibratie-parameters op voor deze joint
+            offset = self.get_parameter(f'joints.{name}.offset').value
+            direction = self.get_parameter(f'joints.{name}.direction').value
+            reduction = self.get_parameter(f'joints.{name}.reduction').value
+
+            # Jouw kalibratieformule:
+            # (Rauwe hoek - Offset) * Richting / Reductie
+            calibrated_pos = ((raw_pos - offset) * direction) / reduction
+            calibrated_msg.position.append(calibrated_pos)
+
+        self.publisher.publish(calibrated_msg)
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = JointCalibrationProcessor()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+

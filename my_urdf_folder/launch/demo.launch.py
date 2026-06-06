@@ -9,6 +9,15 @@ import xacro
 def generate_launch_description():
     pkg_share = get_package_share_directory('easy')
     config_dir = os.path.join(pkg_share, 'config')
+    calibration_config = os.path.join(config_dir,  'calibration.yaml')
+
+
+    joint_calibration_node = Node(
+        package='easy', # or the package where your node lives
+        executable='my_calibration_processor',
+        parameters=[calibration_config] # This loads the YAML file variables into the node
+    )
+
 
     print(f"[DEBUG] Config files: {os.listdir(config_dir)}")
 
@@ -50,7 +59,7 @@ def generate_launch_description():
 
     joint_bridge_node = Node(
        package='easy',
-       executable='joint_command_bridge.py',
+       executable='joint_command_bridge',
        output='screen'
     )
 
@@ -128,6 +137,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         robot_state_publisher,
+        joint_calibration_node,
         static_tf,
         move_group_node,
         rviz_node,

@@ -1,0 +1,55 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)
+-- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+-- Configuring done (0.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /urdf/build/easy
+-- Install configuration: ""
+-- Installing: /urdf/install/easy/share/ament_index/resource_index/package_run_dependencies/easy
+-- Installing: /urdf/install/easy/share/ament_index/resource_index/parent_prefix_path/easy
+-- Installing: /urdf/install/easy/share/easy/environment/ament_prefix_path.sh
+-- Installing: /urdf/install/easy/share/easy/environment/ament_prefix_path.dsv
+-- Installing: /urdf/install/easy/share/easy/environment/path.sh
+-- Installing: /urdf/install/easy/share/easy/environment/path.dsv
+-- Installing: /urdf/install/easy/share/easy/local_setup.bash
+-- Installing: /urdf/install/easy/share/easy/local_setup.sh
+-- Installing: /urdf/install/easy/share/easy/local_setup.zsh
+-- Installing: /urdf/install/easy/share/easy/local_setup.dsv
+-- Installing: /urdf/install/easy/share/easy/package.dsv
+-- Installing: /urdf/install/easy/share/ament_index/resource_index/packages/easy
+-- Installing: /urdf/install/easy/share/easy/cmake/easyConfig.cmake
+-- Installing: /urdf/install/easy/share/easy/cmake/easyConfig-version.cmake
+-- Installing: /urdf/install/easy/share/easy/package.xml
+-- Installing: /urdf/install/easy/share/easy/launch
+-- Installing: /urdf/install/easy/share/easy/launch/moveit_rviz.launch.py
+-- Installing: /urdf/install/easy/share/easy/launch/demo.launch.py
+-- Installing: /urdf/install/easy/share/easy/launch/spawn_controllers.launch.py
+-- Installing: /urdf/install/easy/share/easy/launch/static_virtual_joint_tfs.launch.py
+-- Installing: /urdf/install/easy/share/easy/launch/move_group.launch.py-old
+-- Installing: /urdf/install/easy/share/easy/launch/move_group.launch.py
+-- Installing: /urdf/install/easy/share/easy/launch/rsp.launch.py
+-- Installing: /urdf/install/easy/share/easy/launch/setup_assistant.launch.py
+-- Installing: /urdf/install/easy/share/easy/launch/warehouse_db.launch.py
+-- Installing: /urdf/install/easy/share/easy/launch/__pycache__
+-- Installing: /urdf/install/easy/share/easy/launch/__pycache__/static_virtual_joint_tfs.launch.cpython-312.pyc
+-- Installing: /urdf/install/easy/share/easy/launch/__pycache__/warehouse_db.launch.cpython-312.pyc
+-- Installing: /urdf/install/easy/share/easy/launch/__pycache__/move_group.launch.cpython-312.pyc
+-- Installing: /urdf/install/easy/share/easy/launch/__pycache__/rsp.launch.cpython-312.pyc
+-- Installing: /urdf/install/easy/share/easy/launch/__pycache__/spawn_controllers.launch.cpython-312.pyc
+-- Installing: /urdf/install/easy/share/easy/launch/__pycache__/demo.launch.cpython-312.pyc
+-- Installing: /urdf/install/easy/share/easy/launch/__pycache__/moveit_rviz.launch.cpython-312.pyc
+[31mCMake Error at cmake_install.cmake:109 (file):
+  file INSTALL cannot find "/urdf/config": No such file or directory.
+
+[0m

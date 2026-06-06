@@ -1,0 +1,55 @@
+[0.009s] Invoking command in '/urdf/build/easy': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /urdf -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/urdf/install/easy
+[0.041s] -- Found ament_cmake: 2.5.5 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[0.186s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.265s] -- Configuring done (0.2s)
+[0.270s] -- Generating done (0.0s)
+[0.271s] -- Build files have been written to: /urdf/build/easy
+[0.275s] Invoked command in '/urdf/build/easy' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake /urdf -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/urdf/install/easy
+[0.276s] Invoking command in '/urdf/build/easy': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /urdf/build/easy -- -j8 -l8
+[0.306s] Invoked command in '/urdf/build/easy' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --build /urdf/build/easy -- -j8 -l8
+[0.313s] Invoking command in '/urdf/build/easy': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /urdf/build/easy
+[0.319s] -- Install configuration: ""
+[0.319s] -- Execute custom install script
+[0.319s] -- Symlinking: /urdf/install/easy/share/ament_index/resource_index/package_run_dependencies/easy
+[0.325s] -- Symlinking: /urdf/install/easy/share/ament_index/resource_index/parent_prefix_path/easy
+[0.331s] -- Symlinking: /urdf/install/easy/share/easy/environment/ament_prefix_path.sh
+[0.337s] -- Symlinking: /urdf/install/easy/share/easy/environment/ament_prefix_path.dsv
+[0.342s] -- Symlinking: /urdf/install/easy/share/easy/environment/path.sh
+[0.349s] -- Symlinking: /urdf/install/easy/share/easy/environment/path.dsv
+[0.355s] -- Symlinking: /urdf/install/easy/share/easy/local_setup.bash
+[0.361s] -- Symlinking: /urdf/install/easy/share/easy/local_setup.sh
+[0.367s] -- Symlinking: /urdf/install/easy/share/easy/local_setup.zsh
+[0.373s] -- Symlinking: /urdf/install/easy/share/easy/local_setup.dsv
+[0.379s] -- Symlinking: /urdf/install/easy/share/easy/package.dsv
+[0.385s] -- Symlinking: /urdf/install/easy/share/ament_index/resource_index/packages/easy
+[0.392s] -- Symlinking: /urdf/install/easy/share/easy/cmake/easyConfig.cmake
+[0.397s] -- Symlinking: /urdf/install/easy/share/easy/cmake/easyConfig-version.cmake
+[0.404s] -- Symlinking: /urdf/install/easy/share/easy/package.xml
+[0.412s] -- Symlinking: /urdf/install/easy/share/easy/launch/__pycache__/demo.launch.cpython-312.pyc
+[0.418s] -- Symlinking: /urdf/install/easy/share/easy/launch/__pycache__/move_group.launch.cpython-312.pyc
+[0.424s] -- Symlinking: /urdf/install/easy/share/easy/launch/__pycache__/moveit_rviz.launch.cpython-312.pyc
+[0.430s] -- Symlinking: /urdf/install/easy/share/easy/launch/__pycache__/rsp.launch.cpython-312.pyc
+[0.436s] -- Symlinking: /urdf/install/easy/share/easy/launch/__pycache__/spawn_controllers.launch.cpython-312.pyc
+[0.444s] -- Symlinking: /urdf/install/easy/share/easy/launch/__pycache__/static_virtual_joint_tfs.launch.cpython-312.pyc
+[0.451s] -- Symlinking: /urdf/install/easy/share/easy/launch/__pycache__/warehouse_db.launch.cpython-312.pyc
+[0.457s] -- Symlinking: /urdf/install/easy/share/easy/launch/demo.launch.py
+[0.463s] -- Symlinking: /urdf/install/easy/share/easy/launch/move_group.launch.py
+[0.468s] -- Symlinking: /urdf/install/easy/share/easy/launch/move_group.launch.py-jj
+[0.474s] -- Symlinking: /urdf/install/easy/share/easy/launch/move_group.launch.py-old
+[0.481s] -- Symlinking: /urdf/install/easy/share/easy/launch/moveit_rviz.launch.py
+[0.486s] -- Symlinking: /urdf/install/easy/share/easy/launch/rsp.launch.py
+[0.493s] -- Symlinking: /urdf/install/easy/share/easy/launch/setup_assistant.launch.py
+[0.498s] -- Symlinking: /urdf/install/easy/share/easy/launch/spawn_controllers.launch.py
+[0.504s] -- Symlinking: /urdf/install/easy/share/easy/launch/static_virtual_joint_tfs.launch.py
+[0.510s] -- Symlinking: /urdf/install/easy/share/easy/launch/warehouse_db.launch.py
+[0.516s] -- Symlinking: /urdf/install/easy/share/easy/config/ebamk2.ros2_control.xacro
+[0.522s] -- Symlinking: /urdf/install/easy/share/easy/config/ebamk2.srdf
+[0.528s] -- Symlinking: /urdf/install/easy/share/easy/config/ebamk2.urdf.xacro
+[0.532s] -- Symlinking: /urdf/install/easy/share/easy/config/initial_positions.yaml
+[0.539s] -- Symlinking: /urdf/install/easy/share/easy/config/joint_limits.yaml
+[0.545s] -- Symlinking: /urdf/install/easy/share/easy/config/kinematics.yaml
+[0.551s] -- Symlinking: /urdf/install/easy/share/easy/config/moveit.rviz
+[0.557s] -- Symlinking: /urdf/install/easy/share/easy/config/ompl_planning.yaml
+[0.562s] -- Symlinking: /urdf/install/easy/share/easy/config/pilz_cartesian_limits.yaml
+[0.568s] -- Symlinking: /urdf/install/easy/share/easy/.setup_assistant
+[0.575s] Invoked command in '/urdf/build/easy' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy /usr/bin/cmake --install /urdf/build/easy

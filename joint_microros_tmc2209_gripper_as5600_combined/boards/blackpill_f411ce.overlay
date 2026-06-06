@@ -17,13 +17,16 @@
 
 /* ==================== I2C Buses with AS5600 ==================== */
 
+
+
+/* as5600_3 should be on i2c3 but then I had to replug cables ... this is the soft solution */
 &i2c1 {
     status = "okay";
     pinctrl-0 = <&i2c1_scl_pb6 &i2c1_sda_pb7>;
     pinctrl-names = "default";
     clock-frequency = <100000>;
 
-    as5600_1: as5600@36 {
+    as5600_3: as5600@36 {
         compatible = "ams,as5600";
         status = "okay";
         reg = <0x36>;
@@ -49,7 +52,7 @@
     status = "okay";
     clock-frequency = <100000>;
 
-    as5600_3: as5600@36 {
+    as5600_1: as5600@36 {
         compatible = "ams,as5600";
         status = "okay";
         reg = <0x36>;
@@ -91,7 +94,7 @@
         max-pulse = <2300000>;
     };
 
-    tmc2209_m0: tmc2209_m0 {
+    tmc2209_m2: tmc2209_m2 {
         compatible = "adi,tmc2209";
         en-gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
         micro-step-res = <32>;
@@ -103,18 +106,19 @@
         micro-step-res = <32>;
     };
 
-    tmc2209_m2: tmc2209_m2 {
+
+    tmc2209_m0: tmc2209_m0 {
         compatible = "adi,tmc2209";
         en-gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
         micro-step-res = <32>;
     };
 
-    stepper0_control: stepper0 {
+    stepper2_control: stepper2 {
         compatible = "zephyr,gpio-step-dir-stepper-ctrl";
         status = "okay";
         step-gpios = <&gpioa 6 GPIO_ACTIVE_HIGH>;
         dir-gpios = <&gpioa 7 GPIO_ACTIVE_HIGH>;
-        stepper-driver = <&tmc2209_m0>;
+        stepper-driver = <&tmc2209_m2>;
     };
 
     stepper1_control: stepper1 {
@@ -125,12 +129,12 @@
         stepper-driver = <&tmc2209_m1>;
     };
 
-    stepper2_control: stepper2 {
+    stepper0_control: stepper0 {
         compatible = "zephyr,gpio-step-dir-stepper-ctrl";
         status = "okay";
         step-gpios = <&gpioa 3 GPIO_ACTIVE_HIGH>;
         dir-gpios = <&gpioa 5 GPIO_ACTIVE_HIGH>;
-        stepper-driver = <&tmc2209_m2>;
+        stepper-driver = <&tmc2209_m0>;
     };
 
     chosen {

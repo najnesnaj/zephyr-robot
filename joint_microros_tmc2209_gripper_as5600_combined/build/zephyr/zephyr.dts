@@ -13,8 +13,8 @@
 		zephyr,system-timer-companion = &rtc; /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:27 */
 		zephyr,sram = &sram0;                 /* in zephyr/boards/weact/blackpill_f411ce/blackpill_f411ce.dts:20 */
 		zephyr,flash = &flash0;               /* in zephyr/boards/weact/blackpill_f411ce/blackpill_f411ce.dts:21 */
-		zephyr,console = &cdc_acm_uart0;      /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:137 */
-		zephyr,shell-uart = &cdc_acm_uart0;   /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:138 */
+		zephyr,console = &cdc_acm_uart0;      /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:141 */
+		zephyr,shell-uart = &cdc_acm_uart0;   /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:142 */
 	};
 
 	/* node '/aliases' defined in zephyr/dts/common/skeleton.dtsi:15 */
@@ -23,9 +23,9 @@
 		sw0 = &user_button;           /* in zephyr/boards/weact/blackpill_f411ce/blackpill_f411ce.dts:45 */
 		volt-sensor0 = &vref;         /* in zephyr/boards/weact/blackpill_f411ce/blackpill_f411ce.dts:46 */
 		volt-sensor1 = &vbat;         /* in zephyr/boards/weact/blackpill_f411ce/blackpill_f411ce.dts:47 */
-		stepper0 = &stepper0_control; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:82 */
-		stepper1 = &stepper1_control; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:83 */
-		stepper2 = &stepper2_control; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:84 */
+		stepper0 = &stepper0_control; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:85 */
+		stepper1 = &stepper1_control; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:86 */
+		stepper2 = &stepper2_control; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:87 */
 	};
 
 	/* node '/soc' defined in zephyr/dts/arm/armv7-m.dtsi:6 */
@@ -295,7 +295,7 @@
 				pinmux = < 0x2c4 >; /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:202 */
 				bias-pull-up;       /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:203 */
 				drive-open-drain;   /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:204 */
-				phandle = < 0x7 >;  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:22 */
+				phandle = < 0x7 >;  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:25 */
 			};
 
 			/* node '/soc/pin-controller@40020000/i2c2_scl_pb10' defined in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:213 */
@@ -303,7 +303,7 @@
 				pinmux = < 0x344 >; /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:214 */
 				bias-pull-up;       /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:215 */
 				drive-open-drain;   /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:216 */
-				phandle = < 0x9 >;  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:34 */
+				phandle = < 0x9 >;  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:37 */
 			};
 
 			/* node '/soc/pin-controller@40020000/i2c3_scl_pa8' defined in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:219 */
@@ -311,7 +311,7 @@
 				pinmux = < 0x104 >; /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:220 */
 				bias-pull-up;       /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:221 */
 				drive-open-drain;   /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:222 */
-				phandle = < 0xb >;  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:47 */
+				phandle = < 0xb >;  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:50 */
 			};
 
 			/* node '/soc/pin-controller@40020000/i2c1_sda_pb7' defined in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:227 */
@@ -319,7 +319,7 @@
 				pinmux = < 0x2e4 >; /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:228 */
 				bias-pull-up;       /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:229 */
 				drive-open-drain;   /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:230 */
-				phandle = < 0x8 >;  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:22 */
+				phandle = < 0x8 >;  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:25 */
 			};
 
 			/* node '/soc/pin-controller@40020000/i2c2_sda_pb3' defined in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:239 */
@@ -327,7 +327,7 @@
 				pinmux = < 0x269 >; /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:240 */
 				bias-pull-up;       /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:241 */
 				drive-open-drain;   /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:242 */
-				phandle = < 0xa >;  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:34 */
+				phandle = < 0xa >;  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:37 */
 			};
 
 			/* node '/soc/pin-controller@40020000/i2c3_sda_pb4' defined in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:251 */
@@ -335,7 +335,7 @@
 				pinmux = < 0x289 >; /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:252 */
 				bias-pull-up;       /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:253 */
 				drive-open-drain;   /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:254 */
-				phandle = < 0xc >;  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:47 */
+				phandle = < 0xc >;  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:50 */
 			};
 
 			/* node '/soc/pin-controller@40020000/spi1_miso_pa6' defined in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:502 */
@@ -372,8 +372,8 @@
 
 			/* node '/soc/pin-controller@40020000/tim4_ch3_pb8' defined in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:806 */
 			tim4_ch3_pb8: tim4_ch3_pb8 {
-				pinmux = < 0x302 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:63 */
-				phandle = < 0x14 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:73 */
+				pinmux = < 0x302 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:66 */
+				phandle = < 0x14 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:76 */
 			};
 
 			/* node '/soc/pin-controller@40020000/usart1_rx_pa10' defined in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:864 */
@@ -392,13 +392,13 @@
 			/* node '/soc/pin-controller@40020000/usb_otg_fs_dm_pa11' defined in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:925 */
 			usb_otg_fs_dm_pa11: usb_otg_fs_dm_pa11 {
 				pinmux = < 0x16a >; /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:926 */
-				phandle = < 0x12 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:145 */
+				phandle = < 0x12 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:149 */
 			};
 
 			/* node '/soc/pin-controller@40020000/usb_otg_fs_dp_pa12' defined in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:929 */
 			usb_otg_fs_dp_pa12: usb_otg_fs_dp_pa12 {
 				pinmux = < 0x18a >; /* in modules/hal/stm32/dts/st/f4/stm32f411c(c-e)ux-pinctrl.dtsi:930 */
-				phandle = < 0x13 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:145 */
+				phandle = < 0x13 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:149 */
 			};
 		};
 
@@ -465,17 +465,17 @@
 			             < 0x20 0x0 >;                   /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:322 */
 			interrupt-names = "event",
 			                  "error";                   /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:323 */
-			status = "okay";                             /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:21 */
-			pinctrl-0 = < &i2c1_scl_pb6 &i2c1_sda_pb7 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:22 */
-			pinctrl-names = "default";                   /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:23 */
-			clock-frequency = < 0x186a0 >;               /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:24 */
+			status = "okay";                             /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:24 */
+			pinctrl-0 = < &i2c1_scl_pb6 &i2c1_sda_pb7 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:25 */
+			pinctrl-names = "default";                   /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:26 */
+			clock-frequency = < 0x186a0 >;               /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:27 */
 			phandle = < 0x1f >;                          /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:705 */
 
-			/* node '/soc/i2c@40005400/as5600@36' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:26 */
-			as5600_1: as5600@36 {
-				compatible = "ams,as5600"; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:27 */
-				status = "okay";           /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:28 */
-				reg = < 0x36 >;            /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:29 */
+			/* node '/soc/i2c@40005400/as5600@36' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:29 */
+			as5600_3: as5600@36 {
+				compatible = "ams,as5600"; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:30 */
+				status = "okay";           /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:31 */
+				reg = < 0x36 >;            /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:32 */
 			};
 		};
 
@@ -490,17 +490,17 @@
 			             < 0x22 0x0 >;                    /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:334 */
 			interrupt-names = "event",
 			                  "error";                    /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:335 */
-			pinctrl-0 = < &i2c2_scl_pb10 &i2c2_sda_pb3 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:34 */
-			pinctrl-names = "default";                    /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:35 */
-			status = "okay";                              /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:36 */
-			clock-frequency = < 0x186a0 >;                /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:37 */
+			pinctrl-0 = < &i2c2_scl_pb10 &i2c2_sda_pb3 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:37 */
+			pinctrl-names = "default";                    /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:38 */
+			status = "okay";                              /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:39 */
+			clock-frequency = < 0x186a0 >;                /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:40 */
 			phandle = < 0x20 >;                           /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:713 */
 
-			/* node '/soc/i2c@40005800/as5600@36' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:39 */
+			/* node '/soc/i2c@40005800/as5600@36' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:42 */
 			as5600_2: as5600@36 {
-				compatible = "ams,as5600"; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:40 */
-				status = "okay";           /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:41 */
-				reg = < 0x36 >;            /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:42 */
+				compatible = "ams,as5600"; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:43 */
+				status = "okay";           /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:44 */
+				reg = < 0x36 >;            /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:45 */
 			};
 		};
 
@@ -515,17 +515,17 @@
 			             < 0x49 0x0 >;                   /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:346 */
 			interrupt-names = "event",
 			                  "error";                   /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:347 */
-			pinctrl-0 = < &i2c3_scl_pa8 &i2c3_sda_pb4 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:47 */
-			pinctrl-names = "default";                   /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:48 */
-			status = "okay";                             /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:49 */
-			clock-frequency = < 0x186a0 >;               /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:50 */
+			pinctrl-0 = < &i2c3_scl_pa8 &i2c3_sda_pb4 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:50 */
+			pinctrl-names = "default";                   /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:51 */
+			status = "okay";                             /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:52 */
+			clock-frequency = < 0x186a0 >;               /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:53 */
 			phandle = < 0x21 >;                          /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:721 */
 
-			/* node '/soc/i2c@40005c00/as5600@36' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:52 */
-			as5600_3: as5600@36 {
-				compatible = "ams,as5600"; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:53 */
-				status = "okay";           /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:54 */
-				reg = < 0x36 >;            /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:55 */
+			/* node '/soc/i2c@40005c00/as5600@36' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:55 */
+			as5600_1: as5600@36 {
+				compatible = "ams,as5600"; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:56 */
+				status = "okay";           /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:57 */
+				reg = < 0x36 >;            /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:58 */
 			};
 		};
 
@@ -555,14 +555,14 @@
 			phys = < &otgfs_phy >;                                   /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:370 */
 			clocks = < &rcc 0x34 0x80 >,
 			         < &rcc 0x7 0xff >;                              /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:371 */
-			pinctrl-0 = < &usb_otg_fs_dm_pa11 &usb_otg_fs_dp_pa12 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:145 */
-			pinctrl-names = "default";                               /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:146 */
-			status = "okay";                                         /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:147 */
+			pinctrl-0 = < &usb_otg_fs_dm_pa11 &usb_otg_fs_dp_pa12 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:149 */
+			pinctrl-names = "default";                               /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:150 */
+			status = "okay";                                         /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:151 */
 
-			/* node '/soc/usb@50000000/cdc_acm_uart0' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:151 */
+			/* node '/soc/usb@50000000/cdc_acm_uart0' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:155 */
 			cdc_acm_uart0: cdc_acm_uart0 {
-				compatible = "zephyr,cdc-acm-uart"; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:152 */
-				label = "CDC_ACM_0";                /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:153 */
+				compatible = "zephyr,cdc-acm-uart"; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:156 */
+				label = "CDC_ACM_0";                /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:157 */
 			};
 		};
 
@@ -680,17 +680,17 @@
 			resets = < &rctl 0x402 >;       /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:468 */
 			interrupts = < 0x1e 0x0 >;      /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:469 */
 			interrupt-names = "global";     /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:470 */
-			status = "okay";                /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:68 */
-			st,prescaler = < 0x3e8 >;       /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:69 */
+			status = "okay";                /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:71 */
+			st,prescaler = < 0x3e8 >;       /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:72 */
 
 			/* node '/soc/timers@40000800/pwm' defined in zephyr/dts/arm/st/f4/stm32f4.dtsi:474 */
 			pwm4: pwm {
 				compatible = "st,stm32-pwm";   /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:475 */
 				#pwm-cells = < 0x3 >;          /* in zephyr/dts/arm/st/f4/stm32f4.dtsi:477 */
-				status = "okay";               /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:72 */
-				pinctrl-0 = < &tim4_ch3_pb8 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:73 */
-				pinctrl-names = "default";     /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:74 */
-				phandle = < 0x23 >;            /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:89 */
+				status = "okay";               /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:75 */
+				pinctrl-0 = < &tim4_ch3_pb8 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:76 */
+				pinctrl-names = "default";     /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:77 */
+				phandle = < 0x23 >;            /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:92 */
 			};
 
 			/* node '/soc/timers@40000800/counter' defined in zephyr/dts/arm/st/f4/stm32f4.dtsi:480 */
@@ -1233,62 +1233,62 @@
 		};
 	};
 
-	/* node '/servo' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:87 */
+	/* node '/servo' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:90 */
 	servo: servo {
-		compatible = "pwm-servo";           /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:88 */
-		pwms = < &pwm4 0x3 0x1312d00 0x0 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:89 */
-		min-pulse = < 0xaae60 >;            /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:90 */
-		max-pulse = < 0x231860 >;           /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:91 */
+		compatible = "pwm-servo";           /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:91 */
+		pwms = < &pwm4 0x3 0x1312d00 0x0 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:92 */
+		min-pulse = < 0xaae60 >;            /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:93 */
+		max-pulse = < 0x231860 >;           /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:94 */
 	};
 
-	/* node '/tmc2209_m0' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:94 */
-	tmc2209_m0: tmc2209_m0 {
-		compatible = "adi,tmc2209";    /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:95 */
-		en-gpios = < &gpioc 0xd 0x0 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:96 */
-		micro-step-res = < 0x20 >;     /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:97 */
-		phandle = < 0x24 >;            /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:117 */
-	};
-
-	/* node '/tmc2209_m1' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:100 */
-	tmc2209_m1: tmc2209_m1 {
-		compatible = "adi,tmc2209";    /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:101 */
-		en-gpios = < &gpioc 0xd 0x0 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:102 */
-		micro-step-res = < 0x20 >;     /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:103 */
-		phandle = < 0x25 >;            /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:125 */
-	};
-
-	/* node '/tmc2209_m2' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:106 */
+	/* node '/tmc2209_m2' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:97 */
 	tmc2209_m2: tmc2209_m2 {
-		compatible = "adi,tmc2209";    /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:107 */
-		en-gpios = < &gpioc 0xd 0x0 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:108 */
-		micro-step-res = < 0x20 >;     /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:109 */
-		phandle = < 0x26 >;            /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:133 */
+		compatible = "adi,tmc2209";    /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:98 */
+		en-gpios = < &gpioc 0xd 0x0 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:99 */
+		micro-step-res = < 0x20 >;     /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:100 */
+		phandle = < 0x24 >;            /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:121 */
 	};
 
-	/* node '/stepper0' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:112 */
-	stepper0_control: stepper0 {
-		compatible = "zephyr,gpio-step-dir-stepper-ctrl"; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:113 */
-		status = "okay";                                  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:114 */
-		step-gpios = < &gpioa 0x6 0x0 >;                  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:115 */
-		dir-gpios = < &gpioa 0x7 0x0 >;                   /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:116 */
-		stepper-driver = < &tmc2209_m0 >;                 /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:117 */
+	/* node '/tmc2209_m1' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:103 */
+	tmc2209_m1: tmc2209_m1 {
+		compatible = "adi,tmc2209";    /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:104 */
+		en-gpios = < &gpioc 0xd 0x0 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:105 */
+		micro-step-res = < 0x20 >;     /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:106 */
+		phandle = < 0x25 >;            /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:129 */
 	};
 
-	/* node '/stepper1' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:120 */
-	stepper1_control: stepper1 {
-		compatible = "zephyr,gpio-step-dir-stepper-ctrl"; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:121 */
-		status = "okay";                                  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:122 */
-		step-gpios = < &gpioa 0x0 0x0 >;                  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:123 */
-		dir-gpios = < &gpioa 0x1 0x0 >;                   /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:124 */
-		stepper-driver = < &tmc2209_m1 >;                 /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:125 */
+	/* node '/tmc2209_m0' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:110 */
+	tmc2209_m0: tmc2209_m0 {
+		compatible = "adi,tmc2209";    /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:111 */
+		en-gpios = < &gpioc 0xd 0x0 >; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:112 */
+		micro-step-res = < 0x20 >;     /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:113 */
+		phandle = < 0x26 >;            /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:137 */
 	};
 
-	/* node '/stepper2' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:128 */
+	/* node '/stepper2' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:116 */
 	stepper2_control: stepper2 {
-		compatible = "zephyr,gpio-step-dir-stepper-ctrl"; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:129 */
-		status = "okay";                                  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:130 */
-		step-gpios = < &gpioa 0x3 0x0 >;                  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:131 */
-		dir-gpios = < &gpioa 0x5 0x0 >;                   /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:132 */
-		stepper-driver = < &tmc2209_m2 >;                 /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:133 */
+		compatible = "zephyr,gpio-step-dir-stepper-ctrl"; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:117 */
+		status = "okay";                                  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:118 */
+		step-gpios = < &gpioa 0x6 0x0 >;                  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:119 */
+		dir-gpios = < &gpioa 0x7 0x0 >;                   /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:120 */
+		stepper-driver = < &tmc2209_m2 >;                 /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:121 */
+	};
+
+	/* node '/stepper1' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:124 */
+	stepper1_control: stepper1 {
+		compatible = "zephyr,gpio-step-dir-stepper-ctrl"; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:125 */
+		status = "okay";                                  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:126 */
+		step-gpios = < &gpioa 0x0 0x0 >;                  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:127 */
+		dir-gpios = < &gpioa 0x1 0x0 >;                   /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:128 */
+		stepper-driver = < &tmc2209_m1 >;                 /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:129 */
+	};
+
+	/* node '/stepper0' defined in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:132 */
+	stepper0_control: stepper0 {
+		compatible = "zephyr,gpio-step-dir-stepper-ctrl"; /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:133 */
+		status = "okay";                                  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:134 */
+		step-gpios = < &gpioa 0x3 0x0 >;                  /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:135 */
+		dir-gpios = < &gpioa 0x5 0x0 >;                   /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:136 */
+		stepper-driver = < &tmc2209_m0 >;                 /* in joint_microros_tmc2209_gripper_as5600_combined/boards/blackpill_f411ce.overlay:137 */
 	};
 };

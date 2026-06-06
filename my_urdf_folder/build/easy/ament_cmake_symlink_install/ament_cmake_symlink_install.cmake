@@ -365,3 +365,9 @@ ament_cmake_symlink_install_directory("/urdf" DIRECTORY "config" "DESTINATION" "
 
 # install(FILES ".setup_assistant" "DESTINATION" "share/easy")
 ament_cmake_symlink_install_files("/urdf" FILES ".setup_assistant" "DESTINATION" "share/easy")
+
+# install(PROGRAMS "launch/joint_command_bridge" "DESTINATION" "lib/easy")
+ament_cmake_symlink_install_programs("/urdf" PROGRAMS "launch/joint_command_bridge" "DESTINATION" "lib/easy")
+
+# install(PROGRAMS "launch/my_calibration_processor" "DESTINATION" "lib/easy")
+ament_cmake_symlink_install_programs("/urdf" PROGRAMS "launch/my_calibration_processor" "DESTINATION" "lib/easy")

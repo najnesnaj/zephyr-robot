@@ -14,6 +14,7 @@
 #include <std_msgs/msg/int32.h>
 #include <rcl_interfaces/msg/log.h>
 #include <rosidl_runtime_c/string_functions.h>
+#include <rosidl_runtime_c/primitives_sequence_functions.h>
 #include <rmw_microros/rmw_microros.h>
 #include <microros_transports.h>
 
@@ -31,21 +32,21 @@
 
 #define M_PI 3.14159265358979323846
 /*these parameters are calibration values obtained while using rviz, where the simulated robot has to match the real one*/
+// these have been set in calibration.yaml under rviz
+//#define JOINT1_OFFSET  2.903821818033854
+//#define JOINT2_OFFSET  1.3882471720377605
+//#define JOINT3_OFFSET  3.4131018744574653
 
-#define JOINT1_OFFSET  2.903821818033854
-#define JOINT2_OFFSET  1.3882471720377605
-#define JOINT3_OFFSET  3.4131018744574653
-
-#define JOINT1_DIR 1
-#define JOINT2_DIR -1 
-#define JOINT3_DIR 1 
+//#define JOINT1_DIR 1
+//#define JOINT2_DIR -1 
+//#define JOINT3_DIR 1 
 
 /*since the encoder is on the steppermotor, which rotates more than the robot arm because of gears / reduction*/
-#define JOINT1_RED 6
-#define JOINT2_RED 3 
-#define JOINT3_RED 3 
+//#define JOINT1_RED 6
+//#define JOINT2_RED 3 
+//#define JOINT3_RED 3 
 
-#define MAX_JOINTS 10
+#define MAX_JOINTS 5 
 
 static const struct pwm_dt_spec servo = PWM_DT_SPEC_GET(DT_NODELABEL(servo));
 static const uint32_t min_pulse = DT_PROP(DT_NODELABEL(servo), min_pulse);
@@ -71,8 +72,8 @@ const struct device *usart1_dev;
 rcl_subscription_t joint_commands_subscriber;
 static sensor_msgs__msg__JointState joint_state_msg;
 
-rcl_subscription_t gripper_commands_subscriber;
-static std_msgs__msg__Int32 gripper_cmd_msg;
+//rcl_subscription_t gripper_commands_subscriber;
+//static std_msgs__msg__Int32 gripper_cmd_msg;
 
 rcl_publisher_t log_publisher;
 rcl_interfaces__msg__Log log_msg;
@@ -209,27 +210,27 @@ void gripper_commands_callback(const void *msgin)
 void joint_commands_callback(const void *msgin)
 {
     const sensor_msgs__msg__JointState *msg = (const sensor_msgs__msg__JointState *)msgin;
-    LOG_INF_PUBLISH("joint_commands_callback");
+    //LOG_INF_PUBLISH("joint_commands_callback");
 
-    if (msg->name.size != 5 || msg->position.size != 5) {
-        LOG_ERR_PUBLISH("Invalid JointState: expected 5 names and 5 positions");
+    if (msg == NULL || msg->position.data == NULL) {
         return;
     }
 
-/*    LOG_INF_PUBLISH("Received JointState: [%.*s, %.*s, %.*s, %.*s, %.*s]", 
-            (int)msg->name.data[0].size, msg->name.data[0].data,
-            (int)msg->name.data[1].size, msg->name.data[1].data,
-            (int)msg->name.data[2].size, msg->name.data[2].data,
-            (int)msg->name.data[3].size, msg->name.data[3].data,
-            (int)msg->name.data[4].size, msg->name.data[4].data);
-    LOG_INF_PUBLISH("Positions: [%.4f, %.4f, %.4f, %.4f, %.4f] rad",
-            (double)msg->position.data[0], 
-            (double)msg->position.data[1], 
-            (double)msg->position.data[2],
-            (double)msg->position.data[3],
-            (double)msg->position.data[4]);
-*/
-    int32_t target_steps0 = ANGLE_TO_STEPS(msg->position.data[0]);
+    // Aangepast: We checken NIET meer op msg->name.size, want die sturen we niet meer mee!
+    if (msg->position.size != 5) {
+        LOG_ERR_PUBLISH("Invalid JointState: expected exactly 5 positions");
+        return;
+    }
+
+
+    // Extract positions
+    double pos0 = msg->position.data[0];
+    double pos1 = -msg->position.data[1];
+    double pos2 = msg->position.data[2];
+
+
+    // Move stepper motors
+    int32_t target_steps0 = ANGLE_TO_STEPS(pos0);
     int32_t delta0 = target_steps0 - current_microsteps0;
     int ret0 = stepper_ctrl_move_by(stepper0_dev, delta0);
     if (ret0 != 0) {
@@ -238,7 +239,7 @@ void joint_commands_callback(const void *msgin)
         current_microsteps0 = target_steps0;
     }
 
-    int32_t target_steps1 = ANGLE_TO_STEPS(msg->position.data[1]);
+    int32_t target_steps1 = ANGLE_TO_STEPS(pos1);
     int32_t delta1 = target_steps1 - current_microsteps1;
     int ret1 = stepper_ctrl_move_by(stepper1_dev, delta1);
     if (ret1 != 0) {
@@ -247,7 +248,7 @@ void joint_commands_callback(const void *msgin)
         current_microsteps1 = target_steps1;
     }
 
-    int32_t target_steps2 = ANGLE_TO_STEPS(msg->position.data[2]);
+    int32_t target_steps2 = ANGLE_TO_STEPS(pos2);
     int32_t delta2 = target_steps2 - current_microsteps2;
     int ret2 = stepper_ctrl_move_by(stepper2_dev, delta2);
     if (ret2 != 0) {
@@ -256,6 +257,8 @@ void joint_commands_callback(const void *msgin)
         current_microsteps2 = target_steps2;
     }
 }
+
+
 
 void angle_timer_callback(rcl_timer_t *timer, int64_t last_call_time)
 {
@@ -278,10 +281,16 @@ void angle_timer_callback(rcl_timer_t *timer, int64_t last_call_time)
     double enc1_deg = (double)encoder1_angle.val1 + (double)encoder1_angle.val2 / 1000000.0;
     double enc2_deg = (double)encoder2_angle.val1 + (double)encoder2_angle.val2 / 1000000.0;
     double enc3_deg = (double)encoder3_angle.val1 + (double)encoder3_angle.val2 / 1000000.0;
-/*TODO the as5600 0 is joint2 and vice versa */
-    joint_state_pub_msg.position.data[2] = ((enc1_deg * M_PI / 180.0) - JOINT1_OFFSET) * JOINT1_DIR / JOINT1_RED;
-    joint_state_pub_msg.position.data[1] = ((enc2_deg * M_PI / 180.0) - JOINT2_OFFSET) * JOINT2_DIR / JOINT2_RED;
-    joint_state_pub_msg.position.data[0] = ((enc3_deg * M_PI / 180.0) - JOINT3_OFFSET) * JOINT3_DIR / JOINT3_RED;
+
+
+//    joint_state_pub_msg.position.data[0] = ((enc1_deg * M_PI / 180.0) - JOINT1_OFFSET) * JOINT1_DIR / JOINT1_RED;
+//    joint_state_pub_msg.position.data[1] = ((enc2_deg * M_PI / 180.0) - JOINT2_OFFSET) * JOINT2_DIR / JOINT2_RED;
+//    joint_state_pub_msg.position.data[2] = ((enc3_deg * M_PI / 180.0) - JOINT3_OFFSET) * JOINT3_DIR / JOINT3_RED;
+
+
+    joint_state_pub_msg.position.data[0] = (enc1_deg * M_PI / 180.0) ;
+    joint_state_pub_msg.position.data[1] = (enc2_deg * M_PI / 180.0) ;
+    joint_state_pub_msg.position.data[2] = (enc3_deg * M_PI / 180.0) ;
     joint_state_pub_msg.position.data[3] = 0.0;
     joint_state_pub_msg.position.data[4] = 0.0;
 
@@ -291,12 +300,12 @@ void angle_timer_callback(rcl_timer_t *timer, int64_t last_call_time)
 
     RCSOFTCHECK(rcl_publish(&joint_state_publisher, (const void*)&joint_state_pub_msg, NULL));
 
-    LOG_INF_PUBLISH("Published /joint_states: [%.4f, %.4f, %.4f, %.4f, %.4f] rad",
+/*    LOG_INF_PUBLISH("Published /joint_states: [%.4f, %.4f, %.4f, %.4f, %.4f] rad",
             joint_state_pub_msg.position.data[0],
             joint_state_pub_msg.position.data[1],
             joint_state_pub_msg.position.data[2],
             joint_state_pub_msg.position.data[3],
-            joint_state_pub_msg.position.data[4]);
+            joint_state_pub_msg.position.data[4]); */
 }
 
 int main(void)
@@ -419,26 +428,34 @@ int main(void)
     /* === Publisher: /joint_states (encoder positions in radians) === */
     sensor_msgs__msg__JointState__init(&joint_state_pub_msg);
 
-    joint_state_pub_msg.name.capacity = 5;
-    joint_state_pub_msg.name.size = 5;
-    joint_state_pub_msg.name.data = (rosidl_runtime_c__String *)
-        malloc(joint_state_pub_msg.name.capacity * sizeof(rosidl_runtime_c__String));
-    for (size_t i = 0; i < joint_state_pub_msg.name.capacity; i++) {
-        joint_state_pub_msg.name.data[i].capacity = 20;
-        joint_state_pub_msg.name.data[i].size = 0;
-        joint_state_pub_msg.name.data[i].data = (char *)
-            malloc(joint_state_pub_msg.name.data[i].capacity * sizeof(char));
-    }
+    // 1. Initialiseer de 'name' array voor het aantal joints
+    rosidl_runtime_c__String__Sequence__init(&joint_state_pub_msg.name, MAX_JOINTS);
+
+    // 2. Initialiseer de 'position' array voor de double-waarden
+//    rosidl_runtime_c__primitives_sequence__double__init(&joint_state_pub_msg.position, MAX_JOINTS);
+
+
+// Vervang: rosidl_runtime_c__primitives_sequence__double__init(...)
+// Door de juiste typespecifieke functies:
+
+     rosidl_runtime_c__double__Sequence__init(&joint_state_pub_msg.position, MAX_JOINTS);
+     rosidl_runtime_c__double__Sequence__init(&joint_state_pub_msg.effort, MAX_JOINTS);
+
+
+
+
+
     rosidl_runtime_c__String__assign(&joint_state_pub_msg.name.data[0], "joint_1");
     rosidl_runtime_c__String__assign(&joint_state_pub_msg.name.data[1], "joint_2");
     rosidl_runtime_c__String__assign(&joint_state_pub_msg.name.data[2], "joint_3");
     rosidl_runtime_c__String__assign(&joint_state_pub_msg.name.data[3], "joint_4");
     rosidl_runtime_c__String__assign(&joint_state_pub_msg.name.data[4], "joint_6");
 
-    joint_state_pub_msg.position.capacity = 5;
+
+    // 4. Zet de sizes correct zodat ROS weet hoeveel data er daadwerkelijk in zit
+    joint_state_pub_msg.name.size = 5;
     joint_state_pub_msg.position.size = 5;
-    joint_state_pub_msg.position.data = (double *)
-        malloc(joint_state_pub_msg.position.capacity * sizeof(double));
+
 
     RCCHECK(rclc_publisher_init_default(&joint_state_publisher, &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, JointState), "/joint_states"));
@@ -452,73 +469,48 @@ int main(void)
 
 
 
-    // Voorbeeld in micro-ROS C code:
-    //rcl_subscription_options_t subscription_ops = rcl_get_default_subscription_options();
-
-    // Belangrijk: Zet de wachtrij op 1. Oude berichten worden direct overschreven i.p.v. opgeslagen in het RAM.
-    //subscription_ops.qos.depth = 1; 
-    //subscription_ops.qos.reliability = RMW_QOS_POLICY_RELIABILITY_BEST_EFFORT;
 
 
-
-
-    /* === Subscribers === */
+    /* === Allocate JointState subscriber message memory === */
     sensor_msgs__msg__JointState__init(&joint_state_msg);
-    //RCCHECK(rclc_subscription_init_default(
+    
+    // 1. Initialiseer de arrays (sequences) met de juiste capaciteit
+    bool success = true;
+    success &= rosidl_runtime_c__String__Sequence__init(&joint_state_msg.name, MAX_JOINTS);
+    success &= rosidl_runtime_c__double__Sequence__init(&joint_state_msg.position, MAX_JOINTS);
+    success &= rosidl_runtime_c__double__Sequence__init(&joint_state_msg.effort, MAX_JOINTS);
+    success &= rosidl_runtime_c__String__init(&joint_state_msg.header.frame_id);
+    
+    // Check of de hoofdallocatie is gelukt
+    if (!success) {
+        LOG_ERR_PUBLISH("Micro-ROS sequence initialization failed");
+        return 0;
+    }
+    
+    // 2. Reserveer vooraf bufferruimte voor de inkomende string-data (essentieel voor een subscriber!)
+    for (size_t i = 0; i < MAX_JOINTS; i++) {
+           rosidl_runtime_c__String__init(&joint_state_msg.name.data[i]);
+           if (!rosidl_runtime_c__String__assignn(&joint_state_msg.name.data[i], "", 32)) {
+              LOG_ERR_PUBLISH("Failed to allocate string buffer for joint name");
+              return 0;
+           }
+    }
+    
+    // 3. Reserveer vooraf bufferruimte voor de frame_id string (bijv. 64 karakters)
+    if (!rosidl_runtime_c__String__assignn(&joint_state_msg.header.frame_id, "", 64)) {
+        LOG_ERR_PUBLISH("Failed to allocate string buffer for frame_id");
+        return 0;
+    }
+    
     RCCHECK(rclc_subscription_init_best_effort(
         &joint_commands_subscriber,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, JointState),
-        "/joint_commands"));
-
-    std_msgs__msg__Int32__init(&gripper_cmd_msg);
-    RCCHECK(rclc_subscription_init_default(
-        &gripper_commands_subscriber,
-        &node,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
-        "/gripper_cmd"));
-
-    /* === Allocate JointState subscriber message memory === */
-    rcl_allocator_t alloc = rcl_get_default_allocator();
-    joint_state_msg.name.capacity = MAX_JOINTS;
-    joint_state_msg.name.size = 0;
-    joint_state_msg.name.data = (rosidl_runtime_c__String *)
-        //malloc(joint_state_msg.name.capacity * sizeof(rosidl_runtime_c__String));
-        alloc.allocate(MAX_JOINTS * sizeof(rosidl_runtime_c__String), alloc.state);
-
-    if (!joint_state_msg.name.data) {
-        LOG_ERR_PUBLISH("malloc failed for joint_state_msg.name.data");
-        return 0;
-    } 
-
-    memset(joint_state_msg.name.data, 0,
-           MAX_JOINTS * sizeof(rosidl_runtime_c__String));
- 
+        "/joint_commands")); 
 
 
-    //for (size_t i = 0; i < joint_state_msg.name.capacity; i++) {
-    for (size_t i = 0; i < MAX_JOINTS; i++) {
-        joint_state_msg.name.data[i].capacity = 32;
-        joint_state_msg.name.data[i].size = 0;
-        joint_state_msg.name.data[i].data = (char *)
-            //malloc(joint_state_msg.name.data[i].capacity * sizeof(char));
-           alloc.allocate(32 * sizeof(char), alloc.state);
-        if (!joint_state_msg.name.data) {
-        LOG_ERR_PUBLISH("malloc failed for joint_state_msg.name.data");
-        return 0;
-        }
+//TODO gripper nog toevoegen
 
-    }
-
-    joint_state_msg.position.capacity = MAX_JOINTS;
-    joint_state_msg.position.size = 0;
-    joint_state_msg.position.data = (double *)
-        //malloc(joint_state_msg.position.capacity * sizeof(double));
-        alloc.allocate(MAX_JOINTS * sizeof(double), alloc.state);
-    if (!joint_state_msg.position.data) {
-        LOG_ERR_PUBLISH("malloc failed for joint_state_msg.position.data");
-        return 0;
-    }
 
     /* === Executor (2 subscriptions + 1 timer = 3 handles) === */
     rclc_executor_t executor = rclc_executor_get_zero_initialized_executor();
@@ -528,9 +520,9 @@ int main(void)
         &executor, &joint_commands_subscriber, &joint_state_msg,
         &joint_commands_callback, ON_NEW_DATA));
 
-    RCCHECK(rclc_executor_add_subscription(
-        &executor, &gripper_commands_subscriber, &gripper_cmd_msg,
-        &gripper_commands_callback, ON_NEW_DATA));
+//    RCCHECK(rclc_executor_add_subscription(
+//       &executor, &gripper_commands_subscriber, &gripper_cmd_msg,
+//        &gripper_commands_callback, ON_NEW_DATA));
 
     RCCHECK(rclc_executor_add_timer(&executor, &angle_timer));
 

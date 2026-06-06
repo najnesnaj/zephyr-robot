@@ -1,0 +1,96 @@
+#!/usr/bin/env python3
+import rclpy
+from rclpy.node import Node
+from control_msgs.msg import JointTrajectoryControllerState
+from sensor_msgs.msg import JointState
+
+class JointCommandBridge(Node):
+    def __init__(self):
+        super().__init__('joint_command_bridge')
+
+        # We luisteren naar de controller state
+        self.subscription = self.create_subscription(
+            JointTrajectoryControllerState,
+            '/ebamk2_controller/controller_state',
+            self.listener_callback,
+            10)
+
+        # We publiceren naar micro-ROS
+        self.publisher = self.create_publisher(
+            JointState,
+            '/joint_commands',
+            10)
+
+        # Laatste opgeslagen posities om te publishen via de timer
+        self.latest_positions = None
+
+        # CRUCIAAL: Beperk de datastroom naar 10Hz (elke 0.1 seconde)
+        # Dit geeft micro-ROS ademruimte om berichten te verwerken zonder buffer-overflows.
+        self.publish_rate = 0.1 
+        self.timer = self.create_timer(self.publish_rate, self.timer_callback)
+        self.get_logger().info("Geoptimaliseerde Bridge (10Hz, No-Names, No-Header) gestart!")
+
+    def listener_callback(self, msg):
+        if not msg.reference.positions:
+            return
+
+        # Haal de posities op
+        #incoming_positions = list(msg.reference.positions)
+        #self.get_logger().info(f"Namen uit controller: {msg.joint_names}")
+
+
+
+        # 1. Maak een dictionary van de inkomende data: { 'joint_name': positie }
+        joint_map = dict(zip(msg.joint_names, msg.reference.positions))
+
+        # 2. Bouw de array EXACT op zoals je C-code hem verwacht (grootte 5)
+        # We mappen joint_1 t/m joint_4 en vullen joint_6 (index 4) aan met 0.0
+        ordered_positions = [
+            joint_map.get('joint_1', 0.0),  # Wordt msg->position.data[0] (Z-as rotatie)
+            joint_map.get('joint_2', 0.0),  # Wordt msg->position.data[1]
+            joint_map.get('joint_3', 0.0),  # Wordt msg->position.data[2]
+            joint_map.get('joint_4', 0.0),  # Wordt msg->position.data[3]
+            joint_map.get('joint_6', 0.0)   # Wordt msg->position.data[4] (Ontbrekende joint)
+        ]
+
+        # 3. Sla de geordende lijst op voor de 10Hz timer_callback
+        self.latest_positions = ordered_positions
+
+
+
+    def timer_callback(self):
+        # Alleen publishen als we daadwerkelijk data hebben ontvangen
+        if self.latest_positions is None:
+            return
+
+        joint_state = JointState()
+        
+        # 1. LAAT DE HEADER LEEG (Bespaart bytes en alignment errors)
+        # joint_state.header.stamp weggehaald
+        
+        # 2. LAAT DE NAMEN LEEG (Strings zijn de hoofdoorzaak van micro-ROS CDR crashes!)
+        joint_state.name = [] 
+        
+        # 3. Vul exact de 5 posities in die de microcontroller verwacht
+        joint_state.position = self.latest_positions
+
+        # 4. Leeg de onnodige velden expliciet om data-vervuiling te voorkomen
+        joint_state.velocity = []
+        joint_state.effort = []
+
+        self.publisher.publish(joint_state)
+
+def main(args=None):
+    rclpy.init(args=args)
+    node = JointCommandBridge()
+    try:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        node.destroy_node()
+        rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()
+
