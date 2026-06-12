@@ -23,7 +23,7 @@ ebamk2_controller:
 
     state_interfaces:
       - position
-      - velocity
+#      - velocity
 
     # === IMPORTANT: Use .0 for these rates ===
     state_publish_rate: 50.0

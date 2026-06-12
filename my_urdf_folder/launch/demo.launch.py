@@ -10,11 +10,18 @@ def generate_launch_description():
     pkg_share = get_package_share_directory('easy')
     config_dir = os.path.join(pkg_share, 'config')
     calibration_config = os.path.join(config_dir,  'calibration.yaml')
+ 
 
+    # 1. Definieer de sim_time parameter (als LaunchArgument of vaste dict)
+    # Door dit hier centraal te zetten kun je het hergebruiken
+    # deze parameter zorgt ervoor dat de tijd van micro_ros/microcontrol genomen wordt en niet systeemtijd
+    #sim_time_parameter = {'use_sim_time': True}    
+    #parameters=[calibration_config, sim_time_parameter] # This loads the YAML file variables into the node
 
     joint_calibration_node = Node(
         package='easy', # or the package where your node lives
         executable='my_calibration_processor',
+        name='joint_calibration_node',
         parameters=[calibration_config] # This loads the YAML file variables into the node
     )
 
@@ -92,7 +99,8 @@ def generate_launch_description():
         output='screen',
         parameters=move_group_parameters,
         arguments=['--ros-args', '--log-level', 'info'],
-        remappings=[('/joint_states', '/joint_states')],
+        #remappings=[('/joint_states', '/joint_states')],
+        remappings=[('/joint_states', '/micro_ros/calibrated_states')],
     )
 
 
@@ -114,11 +122,17 @@ def generate_launch_description():
 
     # ros2_control
     ros2_controllers_path = os.path.join(config_dir, "ros2_controllers.yaml")
-
+        #parameters=[{'robot_description': robot_description}, ros2_controllers_path],
+    robot_desc_dict = moveit_config.robot_description
     ros2_control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[{'robot_description': robot_description}, ros2_controllers_path],
+        parameters=[
+            # .robot_description geeft exact de benodigde {'robot_description': '...URDF DATA...'} dictionary terug
+            robot_desc_dict, 
+            ros2_controllers_path,
+            {'use_sim_time': True} # Zorg dat deze ook op sim_time draait!
+        ],
         output="both",
     )
 

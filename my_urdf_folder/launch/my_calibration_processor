@@ -5,45 +5,72 @@ from sensor_msgs.msg import JointState
 
 class JointCalibrationProcessor(Node):
     def __init__(self):
-        super().__init__('joint_calibration_node')
+        super().__init__(
+             'joint_calibration_node',
+             automatically_declare_parameters_from_overrides=True,
+             allow_undeclared_parameters=True
+        )
         
-        # Declareer de parameters (deze worden automatisch gevuld vanuit je calibration.yaml)
-        self.declare_parameters(
-            namespace='',
-            parameters=[
-                ('joints.joint1.offset', 0.0), ('joints.joint1.direction', 1), ('joints.joint1.reduction', 1.0),
-                ('joints.joint2.offset', 0.0), ('joints.joint2.direction', 1), ('joints.joint2.reduction', 1.0),
-                ('joints.joint3.offset', 0.0), ('joints.joint3.direction', 1), ('joints.joint3.reduction', 1.0),
-            ]
+        # Bekende joint-namen (met underscores, exact zoals in de YAML)
+        self.joints = ['joint_1', 'joint_2', 'joint_3', 'joint_4', 'joint_6']
+
+        # Subscribe op de RAUWE data van micro-ROS
+        self.subscription = self.create_subscription(
+            JointState, 
+            #'/micro_ros/raw_joints', 
+            '/joint_states', 
+            self.listener_callback, 
+            10
         )
 
-        # Subcribe op de RAUWE data van micro-ROS (bijv. '/micro_ros/raw_joints')
-        self.subscription = self.create_subscription(JointState, '/micro_ros/raw_joints', self.listener_callback, 10)
-        
-        # Publisher naar de echte /joint_states waar RViz naar luistert
-        self.publisher = self.create_publisher(JointState, '/joint_states', 10)
+        # AANPASSING: Publiceer naar een aparte topic voor topic_based_ros2_control
+        # Dit voorkomt het knipperen in RViz!
+        self.publisher = self.create_publisher(
+            JointState, 
+            '/micro_ros/calibrated_states', 
+            10
+        )
 
     def listener_callback(self, msg):
         calibrated_msg = JointState()
-        calibrated_msg.header = msg.header
+        #calibrated_msg.header = msg.header
+        # PAS DIT AAN: Gebruik de actuele PC/ROS tijd in plaats van msg.header
+        calibrated_msg.header.stamp = self.get_clock().now().to_msg()
+        calibrated_msg.header.frame_id = msg.header.frame_id # Behoud de frame_id (bijv. 'base_link')
+ 
         calibrated_msg.name = msg.name
+        # Zorg dat velocity en effort expliciet LEEG zijn om corrupte data te wissen
+        calibrated_msg.name = []
+        calibrated_msg.position = []
+        calibrated_msg.velocity = []
+        calibrated_msg.effort = []
 
         for name in msg.name:
+            # Sla joints over die we niet kalibreren
+            if name not in self.joints:
+                continue
+
             # Haal de index op van de joint in het inkomende bericht
             idx = msg.name.index(name)
+            
+            # Controleer of de index wel bestaat in de positions array
+            if idx >= len(msg.position):
+                continue
+                
             raw_pos = msg.position[idx]
 
-            # Haal de specifieke kalibratie-parameters op voor deze joint
+            # Haal de parameters op (haalt nu succesvol 'joint_1' etc. op dankzij de match)
             offset = self.get_parameter(f'joints.{name}.offset').value
             direction = self.get_parameter(f'joints.{name}.direction').value
             reduction = self.get_parameter(f'joints.{name}.reduction').value
 
             # Jouw kalibratieformule:
-            # (Rauwe hoek - Offset) * Richting / Reductie
             calibrated_pos = ((raw_pos - offset) * direction) / reduction
+            calibrated_msg.name.append(name)
             calibrated_msg.position.append(calibrated_pos)
-
-        self.publisher.publish(calibrated_msg)
+        # Publiceer alleen als er daadwerkelijk joints gekalibreerd zijn
+        if calibrated_msg.name:
+            self.publisher.publish(calibrated_msg)
 
 def main(args=None):
     rclpy.init(args=args)

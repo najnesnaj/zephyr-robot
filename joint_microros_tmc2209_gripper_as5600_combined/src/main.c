@@ -26,11 +26,17 @@
 #define STEPPER1_NODE DT_NODELABEL(stepper1_control)
 #define STEPPER2_NODE DT_NODELABEL(stepper2_control)
 
+int64_t last_command_time = 0;
+bool motors_enabled = false;
+
+
+
 #define AS5600_1 DT_NODELABEL(as5600_1)
 #define AS5600_2 DT_NODELABEL(as5600_2)
 #define AS5600_3 DT_NODELABEL(as5600_3)
 
 #define M_PI 3.14159265358979323846
+
 /*these parameters are calibration values obtained while using rviz, where the simulated robot has to match the real one*/
 // these have been set in calibration.yaml under rviz
 //#define JOINT1_OFFSET  2.903821818033854
@@ -59,6 +65,7 @@ LOG_MODULE_REGISTER(joint_stepper_microros, LOG_LEVEL_INF);
 const struct device *stepper0_dev;
 const struct device *stepper1_dev;
 const struct device *stepper2_dev;
+const struct device *gpioc_dev;
 static int32_t current_microsteps0 = 0;
 static int32_t current_microsteps1 = 0;
 static int32_t current_microsteps2 = 0;
@@ -72,8 +79,6 @@ const struct device *usart1_dev;
 rcl_subscription_t joint_commands_subscriber;
 static sensor_msgs__msg__JointState joint_state_msg;
 
-//rcl_subscription_t gripper_commands_subscriber;
-//static std_msgs__msg__Int32 gripper_cmd_msg;
 
 rcl_publisher_t log_publisher;
 rcl_interfaces__msg__Log log_msg;
@@ -225,8 +230,19 @@ void joint_commands_callback(const void *msgin)
 
     // Extract positions
     double pos0 = msg->position.data[0];
-    double pos1 = -msg->position.data[1];
+    double pos1 = msg->position.data[1];
     double pos2 = msg->position.data[2];
+
+
+    last_command_time = k_uptime_get();
+
+    // 2. Als de motoren nog uit stonden, zet ze nu aan
+    if (!motors_enabled) {
+        // '1' betekent hier: zet de pin in zijn ACTIEVE status (drivers aan)
+        gpio_pin_set(gpioc_dev, STEPPER_ENABLE_PIN, 0); 
+        motors_enabled = true;
+        LOG_INF_PUBLISH("steppers activated\n");
+    }
 
 
     // Move stepper motors
@@ -322,13 +338,14 @@ int main(void)
     LOG_INF_PUBLISH("Starting combined joint+encoder micro-ROS Controller...");
 
     /* === GPIO and Stepper initialization === */
-    const struct device *gpioc_dev = DEVICE_DT_GET(DT_NODELABEL(gpioc));
+    gpioc_dev = DEVICE_DT_GET(DT_NODELABEL(gpioc));
     if (!device_is_ready(gpioc_dev)) {
         LOG_ERR_PUBLISH("GPIO device not ready");
         return 0;
     }
 
     gpio_pin_configure(gpioc_dev, STEPPER_ENABLE_PIN, GPIO_OUTPUT_INACTIVE);
+    gpio_pin_set(gpioc_dev, STEPPER_ENABLE_PIN, 1); 
 
     stepper0_dev = DEVICE_DT_GET(STEPPER0_NODE);
     if (!device_is_ready(stepper0_dev)) {
@@ -453,8 +470,8 @@ int main(void)
 
 
     // 4. Zet de sizes correct zodat ROS weet hoeveel data er daadwerkelijk in zit
-    joint_state_pub_msg.name.size = 5;
-    joint_state_pub_msg.position.size = 5;
+    joint_state_pub_msg.name.size = MAX_JOINTS;
+    joint_state_pub_msg.position.size = MAX_JOINTS;
 
 
     RCCHECK(rclc_publisher_init_default(&joint_state_publisher, &node,
@@ -532,6 +549,18 @@ int main(void)
     /* === Main loop === */
     while (1) {
         rclc_executor_spin_some(&executor, RCL_MS_TO_NS(10));
+        // TIMEOUT CHECK: Alleen controleren als de motoren daadwerkelijk aan staan
+        if (motors_enabled) {
+            int64_t current_time = k_uptime_get();
+        
+            // 2000 milliseconden = 2 seconden inactiviteit
+            if ((current_time - last_command_time) > 2000) {
+                  // '0' betekent hier: zet de pin in zijn INACTIEVE status (drivers stroomloos)
+                  gpio_pin_set(gpioc_dev, STEPPER_ENABLE_PIN, 1);
+                  motors_enabled = false;
+                  LOG_INF_PUBLISH("[WARN] Timeout: Geen trajectdata meer ontvangen. Motoren uitgeschakeld voor veiligheid.\n");
+            }
+        }
         k_sleep(K_MSEC(10));
     }
 

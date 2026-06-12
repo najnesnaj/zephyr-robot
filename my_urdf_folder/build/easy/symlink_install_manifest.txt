@@ -53,6 +53,7 @@
 /urdf/install/easy/share/easy/launch/move_group.launch.py
 /urdf/install/easy/share/easy/launch/moveit_rviz.launch.py
 /urdf/install/easy/share/easy/launch/my_calibration_processor
+/urdf/install/easy/share/easy/launch/my_calibration_processor-old
 /urdf/install/easy/share/easy/launch/rsp.launch.py
 /urdf/install/easy/share/easy/launch/setup_assistant.launch.py
 /urdf/install/easy/share/easy/launch/spawn_controllers.launch.py
