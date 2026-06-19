@@ -216,7 +216,7 @@ void joint_commands_callback(const void *msgin)
 {
     const sensor_msgs__msg__JointState *msg = (const sensor_msgs__msg__JointState *)msgin;
     //LOG_INF_PUBLISH("joint_commands_callback");
-
+    printk("commands_callback\n");
     if (msg == NULL || msg->position.data == NULL) {
         return;
     }
@@ -244,15 +244,18 @@ void joint_commands_callback(const void *msgin)
         LOG_INF_PUBLISH("steppers activated\n");
     }
 
-
+    LOG_INF_PUBLISH("move steppers\n");
     // Move stepper motors
     int32_t target_steps0 = ANGLE_TO_STEPS(pos0);
     int32_t delta0 = target_steps0 - current_microsteps0;
+    LOG_INF_PUBLISH("target=%d delta=%d\n", target_steps0, delta0);
     int ret0 = stepper_ctrl_move_by(stepper0_dev, delta0);
     if (ret0 != 0) {
         LOG_ERR_PUBLISH("Stepper0 move failed: %d", ret0);
+        LOG_INF_PUBLISH("stepper failed\n");
     } else {
         current_microsteps0 = target_steps0;
+        LOG_INF_PUBLISH("stepper OK\n");
     }
 
     int32_t target_steps1 = ANGLE_TO_STEPS(pos1);
@@ -284,7 +287,7 @@ void angle_timer_callback(rcl_timer_t *timer, int64_t last_call_time)
     const struct device *as5600_1_dev = DEVICE_DT_GET(AS5600_1);
     const struct device *as5600_2_dev = DEVICE_DT_GET(AS5600_2);
     const struct device *as5600_3_dev = DEVICE_DT_GET(AS5600_3);
-
+    printk("still alive\n");
     sensor_sample_fetch(as5600_1_dev);
     sensor_channel_get(as5600_1_dev, SENSOR_CHAN_ROTATION, &encoder1_angle);
 
@@ -493,6 +496,7 @@ int main(void)
     
     // 1. Initialiseer de arrays (sequences) met de juiste capaciteit
     bool success = true;
+    success &= rosidl_runtime_c__double__Sequence__init(&joint_state_msg.velocity, MAX_JOINTS);
     success &= rosidl_runtime_c__String__Sequence__init(&joint_state_msg.name, MAX_JOINTS);
     success &= rosidl_runtime_c__double__Sequence__init(&joint_state_msg.position, MAX_JOINTS);
     success &= rosidl_runtime_c__double__Sequence__init(&joint_state_msg.effort, MAX_JOINTS);
